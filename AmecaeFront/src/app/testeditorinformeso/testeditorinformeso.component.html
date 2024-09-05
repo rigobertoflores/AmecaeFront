@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-12 colsm-12">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="historiaSelect">Selecciona una Informe Operatorio</label>
+                <select id="historiaSelect" class="form-control" [(ngModel)]="informeeleccionada"
+                    [ngModelOptions]="{standalone: true}">
+                    <option value="0">-- Seleccione un Informe--</option>
+                    <option *ngFor="let historia of informe" [value]="historia.id">{{ historia.nombre }}</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" (click)="guardarinformeexpediente()">Agregar
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 colsm-12">
+
+        <div class="card-body">
+            <div class="form-group">
+                <label for="nombreinput">Expediente</label>
+                <textarea class="texthistoria" id="nombreinputtexthistoria" [(ngModel)]="informeexpediente.informe"
+                    class="form-control" (input)="ajustarAltura($event.target)"></textarea>
+                <br>
+                <button type="button" class="btn btn-success btn-block" (click)="printContent(informeexpediente.informe)" [disabled]="parametro == '0'">Imprimir</button>
+                <button type="button" class="btn btn-primary btn-block"
+                    (click)="guardarinformedentroexpediente()"[disabled]="parametro == '0'">Guardar Informe</button>
+                    <!-- Mensaje de aviso -->
+                    <div *ngIf="parametro == '0'" class="alert alert-warning mt-2">
+                        Los botones se habilitaran cuando guarde la información general del paciente.
+                    </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<button type="button" class="btn btn-danger btn-sm"
+    (click)="BorrarExpediente()" [disabled]="parametro == '0'">Borrar Expediente</button>
+<div class="lottie-container" *ngIf="showLoading">
+    <ng-container>
+        <app-loading></app-loading>
+    </ng-container>
+</div>

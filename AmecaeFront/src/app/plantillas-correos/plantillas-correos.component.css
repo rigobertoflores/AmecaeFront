@@ -1,0 +1,94 @@
+.colorCard{
+    background-color: "#7e84841f";
+}
+
+.pacientes-container {
+    max-height: 200px;
+    /* Ajusta este valor según sea necesario */
+    overflow-y: auto;
+}
+
+.colorPActivos{
+    background-color: "#007bff";
+}
+
+.colorPInactivos {
+    background-color: "#dc3545";
+}
+
+.colorPAgregados {
+    background-color: "#28a745";
+}
+
+.no-bullets {
+    list-style-type: none;
+    /* Elimina las viñetas */
+    padding: 0;
+    /* Opcional: elimina el padding por defecto */
+    margin: 0;
+    /* Opcional: elimina el margin por defecto */
+}
+
+.icono-agregar {
+    cursor: pointer;
+    margin-left: 25px;
+    /* Ajusta este valor según sea necesario para el espacio deseado */
+}
+
+.plantilla-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.icono {
+    margin-right: 10px;
+    /* Espacio entre el icono y el nombre */
+}
+
+.plantilla-nombre {
+    flex-grow: 1;
+    /* Ocupa el espacio disponible */
+    font-weight: bold;
+    margin-right: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+
+.btnAgregar {
+    margin-left: auto; /* Alinea el botón a la derecha */
+    width: 10%;
+    text-align: center;         
+    /* Centra el texto del botón */
+    white-space: nowrap;
+    /* Evita que el texto se quiebre */
+    padding: 0.25rem 0.5rem;
+}
+.form-check-inline {
+    margin-right: 30px;
+    margin-left: 5px;
+}
+@media (max-width: 576px) {
+    .plantilla-item {
+        flex-direction: row;
+            align-items: center;
+    }
+
+    .btnAgregar {
+    margin-left: 10px;
+        width: auto;
+        padding: 0.25rem 0.5rem;
+    }
+                 
+}
+
+.texto:hover {
+    color: #1f68f1;
+    /* Azul oscuro */
+    cursor: pointer;
+    /* Cambia el cursor a una mano cuando pasa sobre el texto */
+}
+.iconoTooltip {
+    color: gray !important;
+}

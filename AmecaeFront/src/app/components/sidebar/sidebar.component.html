@@ -1,0 +1,164 @@
+<aside class="main-sidebar sidebar-dark-primary  elevation-4">
+  <div class="main-content ">
+
+    <a (click)="navigateTo(opcionesSB.Home)" class="brand-link bg-light logo-switch">
+      <img src="assets/user4-128x128.jpg" alt="Logo" class="brand-image logo-xs ">
+      <img src="assets/logo_extendido.jpg" alt="LOGO" class="logo_oliv-xl" style="left: 12px">
+    </a>
+    <!-- User logged -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img [src]="imagenPerfilUrl ? imagenPerfilUrl : imagendefault" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <p class="d-block nameUser">{{user == null? "Usuario": user}}</p>
+      </div>
+    </div>
+    <!-- User logged -->
+    <div
+      class="sidebar os-host os-theme-light os-host-resize-disabled os-host-transition os-host-overflow os-host-overflow-y os-host-overflow-x">
+      <div class="os-resize-observer-host observed">
+        <div class="os-resize-observer" style="left: 0px; right: auto;"></div>
+      </div>
+      <!-- <div class="os-size-auto-observer observed" style="height: calc(100% + 1px); float: left;">
+      <div class="os-resize-observer"></div>
+    </div> -->
+      <!-- <div class="os-content-glue" style="margin: 0px -8px; width: 73px; height: 103px;"></div> -->
+      <div class="os-padding">
+        <div class="os-viewport os-viewport-native-scrollbars-invisible os-viewport-native-scrollbars-overlaid"
+          style="overflow: scroll;">
+          <div class="os-content" style="padding: 0px 8px; height: 100%; width: 100%;">
+
+            <nav class="mt-2">
+              <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu">           
+             <li class="nav-item">
+                <a (click)="navigateTo(opcionesSB.Home)" class="nav-link">
+                  <i class="nav-icon fa-solid fa-house-medical"></i>
+                  <p>
+                    Inicio
+                  </p>
+                </a>
+              </li>
+                <li class="nav-item">
+                  <a (click)="navigateTo(opcionesSB.Profile)" class="nav-link">
+                    <i class="nav-icon fa fa-user"></i>
+                    <p>
+                      Mi perfil
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <div *ngIf="this.user == this.userAdmin">
+                    <a (click)="navigateTo(opcionesSB.NuevoUsuario)" class="nav-link">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                        Registrar usuario nuevo
+                      </p>
+                    </a>
+                  </div>
+                </li>
+                <!-- <li class="nav-item">
+                  <a (click)="navigateTo(opcionesSB.AgregarPaciente)" class="nav-link">
+                    <i class="nav-icon fas fa-handshake"></i>
+                    <p>
+                      Agregar Paciente
+                    </p>
+                  </a>
+                </li> -->
+                <li class="nav-item">
+                  <a (click)="navigateTo(opcionesSB.Tratamientos)" class="nav-link">
+                    <i class="nav-icon fa-solid fa-file-contract"></i>
+                    <p>
+                      Tratamientos
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a (click)="navigateTo(opcionesSB.ConfigHistorias)" class="nav-link d-flex align-items-center">
+                    <i class="nav-icon  fa-solid fa-file-medical"></i>
+                    <p>
+                      Configuración de Historias
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a (click)="navigateTo(opcionesSB.IMC)" class="nav-link">
+                  <i class="nav-icon  fa-solid fa-file-medical"></i>
+                  <p>
+                    IMC
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a (click)="navigateTo(opcionesSB.Impresion)" class="nav-link">
+                  <i class="nav-icon  fa-solid fa-file-medical"></i>
+                  <p>
+                    Configurar impresión
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a (click)="navigateTo(opcionesSB.ConfiguracionInforme)" class="nav-link">
+                    <i class="nav-icon  fa-solid fa-file-medical"></i>
+                    <p>
+                      Configurar Informes
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item menu-is-opening menu-open">
+                  <a href="#" class="nav-link">
+                    <i class=" nav-icon fa-solid fa-envelope"></i>
+                    <p>
+                      Notificaciones Emails
+                      <i class="fas fa-angle-left right"></i>
+                    </p>
+                  </a>
+                  <ul class="nav nav-treeview" style="display: block;">
+                    <li class="nav-item">
+                      <a (click)="navigateTo(opcionesSB.Plantillas)" class="nav-link">
+                        <i class="fa-regular fa-file nav-icon"></i>
+                        <p>Configurar Plantillas</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a (click)="navigateTo(opcionesSB.EnviarNotificaciones)" class="nav-link">
+                        <i class="fa-solid fa-envelopes-bulk nav-icon"></i>
+                        <p>Enviar Notificaciones</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a (click)="navigateTo(opcionesSB.ConsultarNotificaciones)" class="nav-link d-flex align-items-center">
+                        <i class="fa solid- fa-envelope-open-text nav-icon"></i>
+                        <p>Consultar notificaciones</p>
+                      </a>
+                    </li>
+
+                  </ul>
+                </li>
+                <!-- <li class="nav-item">
+                  <a (click)="navigateTo(opcionesSB.Impresion)" class="nav-link">
+                    <i class="nav-icon  fa-solid fa-file-medical"></i>
+                    <p>
+                      Eliminar Expediente
+                    </p>
+                  </a>
+                </li> -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-auto-hidden">
+        <div class="os-scrollbar-track">
+          <div class="os-scrollbar-handle" style="width: 35.7488%; transform: translate(0px);"></div>
+        </div>
+      </div>
+      <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-auto-hidden">
+        <div class="os-scrollbar-track">
+          <div class="os-scrollbar-handle" style="height: 14.6898%; transform: translate(0px, 59.8139px);"></div>
+        </div>
+      </div>
+      <div class="os-scrollbar-corner"></div>
+    </div>
+  </div>
+</aside>

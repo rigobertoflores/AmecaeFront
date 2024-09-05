@@ -1,0 +1,1146 @@
+<div class="wrapper">
+    <app-menu></app-menu>
+    <app-sidebar></app-sidebar>
+    <div class="container-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Pacientes</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item">Fecha actual: {{fechaFormateada}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#informacionp" data-toggle="tab">Información
+                                            General</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#historia" data-toggle="tab">Historia</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#imc" data-toggle="tab">IMC</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#imagendeperfil" data-toggle="tab">Imagen de
+                                            Perfil</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#imagenes" data-toggle="tab">Imágenes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#notas" data-toggle="tab">Pendientes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#recetas" data-toggle="tab">Recetas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#analisis" data-toggle="tab">Complementarios</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#informe" data-toggle="tab">Justificaciones e
+                                            Informes</a>
+                                    </li>
+                                    <li class="nav-item" *ngIf="imprimirExpCompleto">
+                                        <a class="nav-link" href="#imprimirExpCompleto" data-toggle="tab">Imprimir
+                                            Expediente Completo</a>
+                                    </li>
+
+
+
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="active tab-pane" id="informacionp">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mat-elevation-z8">
+                                                    <div class="card card-primary">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">{{pacientedatos?.nombre}}</h3>
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-tool"
+                                                                    data-card-widget="collapse" title="Collapse">
+                                                                    <i class="fas fa-minus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body" *ngIf="PacienteFormulario"
+                                                            [formGroup]="PacienteFormulario">
+                                                            <div class="row">
+
+                                                                <div class="col-md-4 col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label for="inputFechaConsulta">Fecha de
+                                                                            Consulta</label>
+                                                                        <input #input type="date"
+                                                                            id="inputFechaConsulta"
+                                                                            formControlName="fechaConsulta"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label for="inputFechaUltimaConsulta">Fecha de
+                                                                            Última Consulta</label>
+                                                                        <input #input type="date"
+                                                                            id="inputFechaUltimaConsulta"
+                                                                            formControlName="fechaUltimaConsulta"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 colsm-12">
+                                                                    <div
+                                                                        class="card card-primary card-outline collapsed-card">
+                                                                        <div class="card-header">
+                                                                            <h2 class="card-title m-0">Información
+                                                                                Personal
+                                                                                y de Contacto</h2>
+                                                                            <div class="card-tools">
+                                                                                <button type="button"
+                                                                                    class="btn btn-tool"
+                                                                                    data-card-widget="collapse"
+                                                                                    title="Collapse">
+                                                                                    <i class="fas fa-plus"
+                                                                                        style="color: black; "></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 colsm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="inputName">Nombre
+                                                                                            del
+                                                                                            paciente</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputName"
+                                                                                            formControlName="nombre"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 colsm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputFechaDeNacimiento">Fecha
+                                                                                            de Nacimiento</label>
+                                                                                        <input #input type="date"
+                                                                                            formControlName="fechaDeNacimiento"
+                                                                                            id="inputFechaDeNacimiento"
+                                                                                            class="form-control"
+                                                                                            [max]="maxDate"
+                                                                                            [min]="minDate" (change)="onFechaDeNacimientoChange($event)"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 colsm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="inputName">Edad
+                                                                                            del
+                                                                                            paciente</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputEdad"
+                                                                                            formControlName="edad"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 colsm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputSexo">Sexo</label>
+                                                                                        <select #input id="inputSexo"
+                                                                                            class="form-control"
+                                                                                            formControlName="sexo">
+                                                                                            <option value="">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="Masculino">
+                                                                                                Masculino</option>
+                                                                                            <option value="Femenino">
+                                                                                                Femenino</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputEstadoCivil">Estado
+                                                                                            Civil</label>
+                                                                                        <select #input
+                                                                                            id="inputEstadoCivil"
+                                                                                            class="form-control"
+                                                                                            formControlName="estadoCivil">
+                                                                                            <option
+                                                                                                value="No especificado">
+                                                                                                Seleccione...</option>
+                                                                                            <option value="Soltero">
+                                                                                                Soltero
+                                                                                            </option>
+                                                                                            <option value="Casado">
+                                                                                                Casado
+                                                                                            </option>
+                                                                                            <option value="Divorciado">
+                                                                                                Divorciado</option>
+                                                                                            <option value="Viudo">Viudo
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- Ocupación -->
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputOcupacion">Ocupación</label>
+                                                                                        <select #input
+                                                                                            id="inputOcupacion"
+                                                                                            class="form-control"
+                                                                                            formControlName="ocupacion">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
+                                                                                                Seleccione...</option>
+                                                                                            <option value="Abogado">
+                                                                                                Abogado(a)
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AgenteDeViajes">
+                                                                                                Agente de viajes
+                                                                                            </option>
+                                                                                            <option value="Camarero">
+                                                                                                Camarero/Camarera
+                                                                                            </option>
+                                                                                            <option value="Gobierno">
+                                                                                                Gobierno
+                                                                                            </option>
+                                                                                            <option value="Profesor">
+                                                                                                Profesor
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="TrabajadorSalud">
+                                                                                                Trabajador de la salud
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="TrabajadorTecnologia">
+                                                                                                Trabajador de la
+                                                                                                tecnología
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="TrabajadorTurismo">
+                                                                                                Trabajador del turismo
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="VendedorTours">
+                                                                                                Vendedor de tours
+                                                                                            </option>
+                                                                                            <option value="Otro">Otro
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <!-- Domicilio -->
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDomicilio">Domicilio</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDomicilio"
+                                                                                            formControlName="domicilio"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputPoblacion">Población</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputPoblacion"
+                                                                                            formControlName="poblacion"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputTelefono">Teléfono</label>
+                                                                                        <input #input type="tel"
+                                                                                            id="inputTelefono"
+                                                                                            formControlName="telefono"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputEmail">Email</label>
+                                                                                        <input #input type="email"
+                                                                                            id="inputEmail"
+                                                                                            formControlName="email"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputReferencia">Referencia</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputReferencia"
+                                                                                            formControlName="referencia"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 colsm-12">
+                                                                    <div
+                                                                        class="card card-primary card-outline collapsed-card">
+                                                                        <div class="card-header">
+                                                                            <h2 class="card-title m-0">Información del
+                                                                                Esposo/a (si aplica)</h2>
+                                                                            <div class="card-tools">
+                                                                                <button type="button"
+                                                                                    class="btn btn-tool"
+                                                                                    data-card-widget="collapse"
+                                                                                    title="Collapse">
+                                                                                    <i class="fas fa-plus"
+                                                                                        style="color: black; "></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputNombreDelEsposo">Nombre
+                                                                                            del
+                                                                                            Esposo/a</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputNombreDelEsposo"
+                                                                                            formControlName="nombreDelEsposo"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputEdadDelEsposo">Edad
+                                                                                            del
+                                                                                            Esposo/a</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputEdadDelEsposo"
+                                                                                            formControlName="edadDelEsposo"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputOcupacionEsposo">Ocupación
+                                                                                            del
+                                                                                            Esposo/a</label>
+                                                                                        <select #input
+                                                                                            id="inputOcupacionEsposo"
+                                                                                            class="form-control"
+                                                                                            formControlName="ocupacionEsposo">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
+                                                                                                Seleccione...</option>
+                                                                                            <option value="Abogado">
+                                                                                                Abogado(a)
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AgenteDeViajes">
+                                                                                                Agente de viajes
+                                                                                            </option>
+                                                                                            <option value="Camarero">
+                                                                                                Camarero/Camarera
+                                                                                            </option>
+                                                                                            <option value="Gobierno">
+                                                                                                Gobierno
+                                                                                            </option>
+                                                                                            <option value="Profesor">
+                                                                                                Profesor
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="TrabajadorSalud">
+                                                                                                Trabajador de la salud
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="TrabajadorTecnologia">
+                                                                                                Trabajador de la
+                                                                                                tecnología
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="TrabajadorTurismo">
+                                                                                                Trabajador del turismo
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="VendedorTours">
+                                                                                                Vendedor de tours
+                                                                                            </option>
+                                                                                            <option value="Otro">Otro
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 colsm-12">
+                                                                    <div
+                                                                        class="card card-primary card-outline collapsed-card">
+                                                                        <div class="card-header">
+                                                                            <h2 class="card-title m-0">Historial Médico
+                                                                                y
+                                                                                Antecedentes Familiares</h2>
+                                                                            <div class="card-tools">
+                                                                                <button type="button"
+                                                                                    class="btn btn-tool"
+                                                                                    data-card-widget="collapse"
+                                                                                    title="Collapse">
+                                                                                    <i class="fas fa-plus"
+                                                                                        style="color: black; "></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDiabetes">Diabetes</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDiabetes"
+                                                                                            formControlName="diabetes"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHipertension">Hipertensión</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputHipertension"
+                                                                                            formControlName="hipertension"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputTrombosis">Trombosis</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputTrombosis"
+                                                                                            formControlName="trombosis"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputCardiopatias">Cardiopatías</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputCardiopatias"
+                                                                                            formControlName="cardiopatias"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputCancer">Cáncer</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputCancer"
+                                                                                            formControlName="cancer"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputEg">Enfermedades
+                                                                                            genéticas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputEg"
+                                                                                            formControlName="enfermedadesGeneticas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputotraEnfermedad">Otras
+                                                                                            enfermedades</label>
+                                                                                        <textarea
+                                                                                            id="inputotraEnfermedad"
+                                                                                            formControlName="otraEnfermedad"
+                                                                                            class="form-control"
+                                                                                            rows="4"></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 colsm-12">
+                                                                    <div
+                                                                        class="card card-primary card-outline collapsed-card">
+                                                                        <div class="card-header">
+                                                                            <h2 class="card-title m-0">Hábitos
+                                                                                Personales
+                                                                            </h2>
+                                                                            <div class="card-tools">
+                                                                                <button type="button"
+                                                                                    class="btn btn-tool"
+                                                                                    data-card-widget="collapse"
+                                                                                    title="Collapse">
+                                                                                    <i class="fas fa-plus"
+                                                                                        style="color: black; "></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputInmunizaciones">Inmunizaciones</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputInmunizaciones"
+                                                                                            formControlName="inmunizaciones"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputAlcoholismo">Alcoholismo</label>
+                                                                                        <select #input
+                                                                                            id="inputAlcoholismo"
+                                                                                            class="form-control"
+                                                                                            formControlName="alcoholismo">
+                                                                                            <option value="">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="Si">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                            <option value="Ocasional">
+                                                                                                Ocasional
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputTabaquismo">Tabaquismo</label>
+                                                                                        <select #input
+                                                                                            id="inputTabaquismo"
+                                                                                            class="form-control"
+                                                                                            formControlName="tabaquismo">
+                                                                                            <option value="">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="Si">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                            <option value="Ocasional">
+                                                                                                Ocasional
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputTabaquismoPasivo">Tabaquismo
+                                                                                            Pasivo</label>
+                                                                                        <select #input
+                                                                                            id="inputTabaquismoPasivo"
+                                                                                            class="form-control"
+                                                                                            formControlName="tabaquismoPasivo">
+                                                                                            <option value="">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="Si">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDrogasOMedicamentos">Drogas
+                                                                                            o Medicamentos</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDrogasOMedicamentos"
+                                                                                            formControlName="drogasOmedicamentos"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 colsm-12">
+                                                                    <div
+                                                                        class="card card-primary card-outline collapsed-card">
+                                                                        <div class="card-header">
+                                                                            <h2 class="card-title m-0">Grupo Sanguíneo y
+                                                                                Enfermedades Previas</h2>
+                                                                            <div class="card-tools">
+                                                                                <button type="button"
+                                                                                    class="btn btn-tool"
+                                                                                    data-card-widget="collapse"
+                                                                                    title="Collapse">
+                                                                                    <i class="fas fa-plus"
+                                                                                        style="color: black; "></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputGrupoSanguineo">Grupo
+                                                                                            Sanguíneo</label>
+                                                                                        <select #input
+                                                                                            id="inputGrupoSanguineo"
+                                                                                            class="form-control"
+                                                                                            formControlName="grupoSanguineo">
+                                                                                            <option
+                                                                                                value="No especificado">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="A+">A+
+                                                                                            </option>
+                                                                                            <option value="A-">A-
+                                                                                            </option>
+                                                                                            <option value="B+">B+
+                                                                                            </option>
+                                                                                            <option value="B-">B-
+                                                                                            </option>
+                                                                                            <option value="AB+">AB+
+                                                                                            </option>
+                                                                                            <option value="AB-">AB-
+                                                                                            </option>
+                                                                                            <option value="O+">O+
+                                                                                            </option>
+                                                                                            <option value="O-">O-
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputPropiasDeLaInfancia">Enfermedades
+                                                                                            Propias de la
+                                                                                            Infancia</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputPropiasDeLaInfancia"
+                                                                                            formControlName="propiasDeLaInfancia"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHepatitisViralTipo">Tipo
+                                                                                            de
+                                                                                            Hepatitis Viral</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputHepatitisViralTipo"
+                                                                                            formControlName="hepatitisViralTipo"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputParasitosis">Parasitosis</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputParasitosis"
+                                                                                            formControlName="parasitosis"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputToxoplasmosis">Toxoplasmosis</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputToxoplasmosis"
+                                                                                            formControlName="toxoplasmosis"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputCitomegalovirus">Citomegalovirus</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputCitomegalovirus"
+                                                                                            formControlName="citomegalovirus"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHerpes">Herpes</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputHerpes"
+                                                                                            formControlName="herpes"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputClamydiasis">Clamydiasis</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputClamydiasis"
+                                                                                            formControlName="clamydiasis"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHIV">HIV</label>
+                                                                                        <select #input id="inputHIV"
+                                                                                            class="form-control"
+                                                                                            formControlName="hiv">
+                                                                                            <option
+                                                                                                value="No especificado">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputSifilis">Sífilis</label>
+                                                                                        <select #input id="inputSifilis"
+                                                                                            class="form-control"
+                                                                                            formControlName="sifilis">
+                                                                                            <option
+                                                                                                value="No especificado">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputMicosis">Micosis</label>
+                                                                                        <select #input id="inputMicosis"
+                                                                                            class="form-control"
+                                                                                            formControlName="micosis">
+                                                                                            <option
+                                                                                                value="No especificado">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="inputEIP">EIP
+                                                                                            (Enfermedad
+                                                                                            Inflamatoria
+                                                                                            Pélvica)</label>
+                                                                                        <select #input id="inputEIP"
+                                                                                            class="form-control"
+                                                                                            formControlName="eip">
+                                                                                            <option
+                                                                                                value="No especificado">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDiabetesMellitus">Diabetes
+                                                                                            Mellitus</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDiabetesMellitus"
+                                                                                            formControlName="diabetesMellitus"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputOtrasEndocrinas">Otras
+                                                                                            Endocrinas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputOtrasEndocrinas"
+                                                                                            formControlName="otrasEndocrinas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputNefropatias">Nefropatías</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputNefropatias"
+                                                                                            formControlName="nefropatias"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDigestivas">Digestivas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDigestivas"
+                                                                                            formControlName="digestivas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputNeurologicas">Neurológicas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputNeurologicas"
+                                                                                            formControlName="neurologicas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHematologicas">Hematológicas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputHematologicas"
+                                                                                            formControlName="hematologicas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputTumores">Tumores</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputTumores"
+                                                                                            formControlName="tumores"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputCondilomatosis">Condilomatosis</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputCondilomatosis"
+                                                                                            formControlName="condilomatosis"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDisplasias">Displasias</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDisplasias"
+                                                                                            formControlName="displasias"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputAlergia">Alergia</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputAlergia"
+                                                                                            formControlName="alergia"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputRubeola">Rubéola</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputRubeola"
+                                                                                            formControlName="rubeola"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputAmigdalitis">Amigdalitis</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputAmigdalitis"
+                                                                                            formControlName="amigdalitis"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDigestivas">Digestivas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDigestivas"
+                                                                                            formControlName="digestivas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputNeurologicas">Neurológicas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputNeurologicas"
+                                                                                            formControlName="neurologicas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHematologicas">Hematológicas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputHematologicas"
+                                                                                            formControlName="hematologicas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <button type="button" (click)="saveData()"
+                                                                class="btn btn-primary">Guardar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="imagenes">
+                                        <div class="col-12">
+                                            <div class="card card-primary">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Imagenes de la paciente</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row justify-content-center">
+                                                        <div class="image-grid">
+                                                            <div *ngFor="let image of images" class="image-container">
+                                                                <img [src]="image.src" [alt]="image.alt"
+                                                                    (click)="openDialog(image.src)">
+                                                                <span class="fas fa-trash delete-icon"
+                                                                    (click)="deleteImage(image.id)"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">Subir imagen</label>
+                                                            <div class="input-group">
+                                                                <div class="custom-file mr-3">
+                                                                    <input #input type="file" class="custom-file-input"
+                                                                        id="exampleInputFile"
+                                                                        (change)="onFileSelected($event)">
+                                                                    <label class="custom-file-label"
+                                                                        for="exampleInputFile">{{selectedFile?.name}}</label>
+                                                                </div>
+                                                                <div class="input-group-append">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        (click)="upload()"
+                                                                        [disabled]="parametro == '0'">Guardar
+                                                                        Imagen</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Mensaje de aviso -->
+                                                    <div *ngIf="parametro == '0'" class="alert alert-warning mt-2">
+                                                        Los botones se habilitaran cuando guarde la información general
+                                                        del paciente.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="recetas">
+                                        <app-testeditor [recetas]="recetas" [clave]="parametro"
+                                            [fechaActual]="fechaFormateada"
+                                            [paciente]="PacienteFormulario"></app-testeditor>
+
+                                    </div>
+                                    <div class="tab-pane" id="historia">
+                                        <app-testeditor-historia [parametro]="parametro"></app-testeditor-historia>
+                                    </div>
+                                    <div class="tab-pane" id="imc">
+                                        <app-calculadora-imc></app-calculadora-imc>
+                                    </div>
+                                    <div class="tab-pane" id="notas">
+                                        <app-notas [notas]="notas" [clave]="parametro"
+                                            [fechaActual]="fechaFormateada"></app-notas>
+
+                                    </div>
+                                    <div class="tab-pane" id="imagendeperfil">
+                                        <div class="col-12">
+                                            <div class="card card-primary">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Imagenes de Perfil</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row justify-content-center">
+                                                        <div class="image-grid">
+                                                            <img [src]="imagenperfil?.src"
+                                                                (click)="openDialog(imagenperfil?.src)">
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">Subir imagen</label>
+                                                            <div class="input-group">
+                                                                <div class="custom-file mr-3">
+                                                                    <input #input type="file" class="custom-file-input"
+                                                                        id="exampleInputFile"
+                                                                        (change)="onFileSelectedPerfil($event)">
+                                                                    <canvas id="canvas" width="128" height="128"
+                                                                        style="display:none;"></canvas>
+                                                                    <label class="custom-file-label"
+                                                                        for="exampleInputFile">{{selectedFile?.name}}</label>
+                                                                </div>
+                                                                <div class="input-group-append">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        (click)="uploadImagenPerfil()"
+                                                                        [disabled]="parametro == '0'">Guardar
+                                                                        Imagen</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Mensaje de aviso -->
+                                                    <div *ngIf="parametro == '0'" class="alert alert-warning mt-2">
+                                                        Los botones se habilitaran cuando guarde la información general
+                                                        del paciente.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane" id="informe">
+                                        <app-testeditorinformeso [parametro]="parametro"></app-testeditorinformeso>
+                                    </div>
+                                    <div class="tab-pane" id="analisis">
+                                        <app-complementarios></app-complementarios>
+                                    </div>
+                                    <div class="tab-pane" id="imprimirExpCompleto">
+                                        <div>
+                                            <button (click)="printPage()" type="button"
+                                                class="btn btn-success btn-block">Imprimir</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+<div class="lottie-container" *ngIf="showLoading">
+    <ng-container>
+        <app-loading></app-loading>
+    </ng-container>
+</div>

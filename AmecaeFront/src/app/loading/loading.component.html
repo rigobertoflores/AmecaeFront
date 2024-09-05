@@ -1,0 +1,5 @@
+<div class="lottie-container" *ngIf="loading">
+    <ng-container>
+        <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+    </ng-container>
+</div>

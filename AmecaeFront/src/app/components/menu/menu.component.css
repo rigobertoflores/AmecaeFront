@@ -1,0 +1,27 @@
+.nav-item .nav-link.texto {
+     
+    transition: color 0.3s ease;
+    /* Suaviza la transición de color */
+}
+
+.nav-item .nav-link.texto:hover {
+    color: red;
+    /* Color al pasar el mouse */
+}
+
+.nav-item .nav-link.texto:active {
+    color: darkred;
+    /* Color al presionar */
+}
+
+
+.nav-item .nav-link.home {   
+    /* Color por defecto del texto e icono */
+    transition: color 0.3s ease;
+    /* Suaviza la transición de color */
+}
+
+.nav-item .nav-link.home:hover {
+    color: #0069d9;
+    /* Color al pasar el mouse */
+}

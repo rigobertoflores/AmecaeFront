@@ -1,0 +1,17 @@
+.mat-icon {
+    color: #0275d8; /* Cambia el color aquí si es necesario */
+  }
+
+  .buttonedit {
+    background-color: transparent; /* Elimina el fondo */
+    border: none; /* Elimina bordes */
+    box-shadow: none; /* Elimina sombras */
+  }
+
+  buttonedit:hover {
+    background-color: transparent; /* Mantiene el fondo transparente */
+  }
+
+  .content-header {
+    padding: 60px 10px 10px 10px !important;
+}

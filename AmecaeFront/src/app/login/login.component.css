@@ -1,0 +1,34 @@
+.link-like {
+    color: #007bff; /* Color azul típico de los enlaces */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    text-decoration: underline; /* Subraya el texto para simular un enlace */
+  }
+
+  .login-page {
+    background-image: url('../../assets/inicioamecae.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh; /* Make sure it covers the full view height */
+  }
+  
+  /* Additional styles to ensure the content is readable over the background */
+  .card {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border-radius: 5px; /* Slightly rounded corners for the card */
+  }
+
+  .input-group-text {
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent white for input group addon */
+  }
+
+  .btn-primary {
+    background-color: #007bff; /* Adjust the color to suit your branding */
+    border-color: #007bff;
+  }
+
+  .btn-danger {
+    background-color: #dc3545; /* Adjust the color to suit your branding */
+    border-color: #dc3545;
+  }

@@ -1,0 +1,226 @@
+<app-menu></app-menu>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper" style="min-height: 1604.8px">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header p-4">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#notificacionesCitas" data-toggle="tab">Enviar
+                            Notificaciones de Citas</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#enviarFelicitaciones" data-toggle="tab">Enviar
+                            correos de
+                            fechas especiales</a></li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="notificacionesCitas">
+                        <div class="container-fluid">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Seleccione una plantilla de correo</label>
+                                            <select class="form-control"
+                                                (change)="seleccionarPlantilla($event.target.value)">
+                                                <option [value]="0">Seleccione...</option>
+                                                <option *ngFor="let plantilla of plantillaOptions"
+                                                    [value]="plantilla.id">
+                                                    {{plantilla.nombre }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Mostrar datos de la plantilla seleccionada -->
+                                <div class="row">
+                                    <div class="col-md-5" *ngIf="mostrarDatosPlantillaSelected">
+                                        <p><strong>Asunto:</strong> {{ datosPlantillaSelected.asunto }}</p>
+
+                                        <p><strong>Cuerpo del Email:</strong>
+                                        </p>
+                                        <p>{{ datosPlantillaSelected.cuerpoEmail }}</p>
+                                    </div>
+
+                                    <div class="form-group col-md-6 ml-auto" *ngIf="mostrarDatosPlantillaSelected">
+                                        <form [formGroup]="FechaEnvioForm" method="post">
+                                            <label for="inputFecha">Seleccione la fecha de la consulta que quiere
+                                                notificar</label>
+                                            <input #input type="date" id="inputFecha" formControlName="fecha"
+                                                class="form-control" (change)="onFechaChange($event)" />
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 ml-auto" *ngIf="mostrarPacientesdeFechaSelected">
+                                        <div class="card card-primary">
+                                            <div class="card-header">
+                                                <h3 class="card-title">
+                                                    <span class="icono">
+                                                        <i class="fa-solid fa-users-rays"></i>
+                                                    </span>Pacientes con citas para la fecha seleccionada
+                                                </h3>
+
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool"
+                                                        data-card-widget="collapse" title="Collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body" style="display: block;"
+                                                *ngIf="pacientesConcita && pacientesConcita.length > 0; else noCitas">
+
+
+
+                                                <ul class="no-bullets">
+                                                    <div *ngFor=" let paciente of pacientesConcita" class="form-group">
+                                                        <li class="texto pt-2">
+                                                            <div class="plantilla-item">
+                                                                <span class="icono">
+                                                                    <i class="fa-solid fa-user-clock"></i>
+                                                                </span>
+                                                                <span class="plantilla-nombre">
+                                                                    {{ paciente.nombre }}, {{ " " + paciente.email }}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <br>
+                                                    </div>
+                                                </ul>
+
+                                            </div>
+                                            <ng-template #noCitas>
+                                                <p>No existen citas para la fecha seleccionada.</p>
+                                            </ng-template>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--FIN Mostrar datso de la plantilla seleccionada -->
+
+                                <div class="row">
+                                    <div class="col-md-6" *ngIf="mostrarPacientesdeFechaSelected">
+                                        <button type="button" class="btn btn-primary btn-block"
+                                            (click)="enviarNotificaciones()"><i
+                                                class="fa-regular fa-envelope icono"></i>
+                                            Enviar notificaciones
+                                            <span
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                {{cantidadCorreosEnviar}}
+                                                <span class="visually-hidden">Notificaciones a enviar</span>
+                                            </span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- enviar felicitaciones -->
+                    <div class="tab-pane" id="enviarFelicitaciones">
+                        <div class="container-fluid">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Seleccione una plantilla de correo</label>
+                                            <select class="form-control"
+                                                (change)="seleccionarPlantillaFelicitaciones($event.target.value)">
+                                                <option [value]="0">Seleccione...</option>
+                                                <option *ngFor="let plantilla of plantillaOptions"
+                                                    [value]="plantilla.id">
+                                                    {{plantilla.nombre }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Mostrar datos de la plantilla seleccionada -->
+                                <div class="row">
+                                    <div class="col-md-5" *ngIf="mostrarDatosPlantillaFelicitacionesSelected">
+                                        <p><strong>Asunto:</strong> {{ datosPlantillaSelected.asunto }}</p>
+
+                                        <p><strong>Cuerpo del Email:</strong>
+                                        </p>
+                                        <p>{{ datosPlantillaSelected.cuerpoEmail }}</p>
+                                    </div>
+
+                                <!-- </div> -->
+                                <!-- <div class="row"> -->
+                                    <div class="col-md-6 ml-auto" *ngIf="mostrarDatosPlantillaFelicitacionesSelected">
+                                        <div class="card card-primary">
+                                            <div class="card-header">
+                                                <h3 class="card-title">
+                                                    <span class="icono">
+                                                        <i class="fa-solid fa-users-rays"></i>
+                                                    </span>Pacientes asociados a la plantilla de correo
+                                                </h3>
+
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool"
+                                                        data-card-widget="collapse" title="Collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body" style="display: block;"
+                                                *ngIf="pacientesVinculadosAPlantilla && pacientesVinculadosAPlantilla.length > 0; else noCitas">
+
+
+
+                                                <ul class="no-bullets">
+                                                    <div *ngFor=" let paciente of pacientesVinculadosAPlantilla" class="form-group">
+                                                        <li class="texto pt-2">
+                                                            <div class="plantilla-item">
+                                                                <span class="icono">
+                                                                    <i class="fa-solid fa-user-clock"></i>
+                                                                </span>
+                                                                <span class="plantilla-nombre">
+                                                                    {{ paciente.nombrePaciente }}, {{ " " + paciente.email }}
+                                                                </span>
+                                                            </div>
+                                                        </li>
+                                                        <br>
+                                                    </div>
+                                                </ul>
+
+                                            </div>
+                                            <ng-template #noCitas>
+                                                <p>No existen pacientes relacionados a esta plantilla.</p>
+                                            </ng-template>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--FIN Mostrar datso de la plantilla seleccionada -->
+
+                                <div class="row">
+                                    <div class="col-md-6" *ngIf="mostrarDatosPlantillaFelicitacionesSelected">
+                                        <button type="button" class="btn btn-primary btn-block"
+                                            (click)="enviarFelicitaciones()"><i
+                                                class="fa-regular fa-envelope icono"></i>
+                                            Enviar notificaciones
+                                            <span
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                {{cantidadCorreosEnviar}}
+                                                <span class="visually-hidden">Notificaciones a enviar</span>
+                                            </span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="lottie-container" *ngIf="showLoading">
+    <ng-container>
+        <app-loading></app-loading>
+    </ng-container>
+</div>

@@ -1,0 +1,129 @@
+<div class="wrapper">
+<app-menu></app-menu>
+<app-sidebar></app-sidebar>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Configuraciones de Impresión</h1>
+                </div>
+                <div class="col-md-6 colsm-12">
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label for="historiaSelect">Selecciona un Doctor</label>
+                            <select id="historiaSelect" class="form-control" (change)="onUserChange($event)"  [(ngModel)]="userseleccionado" [ngModelOptions]="{standalone: true}">
+                                <option value="0" selected>-- Seleccione una plantilla --</option>
+                                <option *ngFor="let impruser of listaimpre" [value]="impruser.id">{{ impruser.usuario }}
+                                </option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <form [formGroup]="configimpresion">
+                        <div class="row">
+                            <div class="col-md-12 colsm-12">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Longitud y Espacio Encabezado</h3>
+                                    </div>
+                                    <div class="form-horizontal">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputEmail3" class="col-sm-2 col-form-label">Largo</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" formControlName="largo"
+                                                        id="inputEmail3" placeholder="Largo">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail3" class="col-sm-2 col-form-label">Ancho</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" formControlName="ancho"
+                                                        id="inputEmail3" placeholder="Ancho">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputPassword3"
+                                                    class="col-sm-2 col-form-label">Espacio</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" formControlName="espacio"
+                                                        id="inputPassword3" placeholder="Espacio Encabezado">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 colsm-12">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Margenes</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input type="number" class="form-control" formControlName="margen_arriba"
+                                                    placeholder="Arriba">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="number" class="form-control" formControlName="margen_abajo"
+                                                    placeholder="Abajo">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="number" class="form-control"
+                                                    formControlName="margen_izquierdo" placeholder="Izquierdo">
+                                            </div>
+                                            <div class="col-3">
+                                                <input type="number" class="form-control" formControlName="margen_derecho"
+                                                    placeholder="Derecha">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 colsm-12">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Encabezado</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Texto de Encabezado</label>
+                                                    <textarea class="form-control" rows="3" formControlName="encabezado"
+                                                        placeholder="Texto"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="guardarEditarImpre()">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>

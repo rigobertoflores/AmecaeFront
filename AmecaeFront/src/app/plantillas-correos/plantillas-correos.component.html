@@ -1,0 +1,300 @@
+<app-menu></app-menu>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper" style="min-height: 1604.8px">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header p-4">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#listaDePlantila"
+                            data-toggle="tab">Plantillas</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#nuevaPlantila" data-toggle="tab">Agregar
+                            Plantilla</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="listaDePlantila">
+                        <div class="container-fluid">
+                            <h2 class="text-center display-4">Buscar Plantilla</h2>
+                            <div class="row">
+                                <div class="col-md-8 offset-md-2">
+                                    
+                                    <div class="input-group">
+                                        <input type="search" class="form-control form-control-lg"
+                                            placeholder="Escriba aquí" #inputElement
+                                            (keyup)="filtrarPlantillas(inputElement.value)">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-lg btn-default">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-4">
+                            <div class="col-md-4">
+                                <div class="card card-primary">
+                                    <div class="card-body">
+                                        <h2>Plantillas de Correos
+                                            <span class="question">
+                                                <i class="fa-solid fa-circle-question iconoTooltip"
+                                                    title="De click en el nombre de la plantilla para editar o eliminar"></i>
+                                            </span>
+                                        </h2>
+                                        <ul class="no-bullets">
+                                            <div *ngFor="let plantilla of plantillas" class="form-group">
+                                                <li class="texto pt-2">
+                                                    <div class="plantilla-item">
+                                                        <span class="icono">
+                                                            <i class="fa-solid fa-envelope-circle-check"></i>
+                                                        </span>
+                                                        <span class="plantilla-nombre"
+                                                            title="De click en el nombre para editar o eliminar"
+                                                            (click)="viewDetails(plantilla)">
+                                                            {{ plantilla.nombre }}
+                                                        </span>
+                                                        <button type="button"
+                                                            (click)="mostrarAgregarPacientes(plantilla)"
+                                                            class="btn btn-block btn-outline-primary btn-xs btnAgregar"
+                                                            title="Agregar usuarios a la plantilla">
+                                                            <span class="icono">
+                                                                <i class="fa-solid fa-user-plus"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </li>
+                                                <br>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Visualizar plantilla seleccionada -->
+                            <div class="col-md-8" *ngIf="plantillaSelected">
+                                <div class="card card-primary">
+                                    <div class="card-body">
+                                        <form [formGroup]="mostrarPlantillaForm" method="post">
+                                            <input type="hidden" formControlName="idSelected">
+                                            <div class="form-group">
+                                                <input type="text" id="inputName" class="form-control"
+                                                    formControlName="nameSelected"
+                                                    placeholder="Nombre de la plantilla:">
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <input #input type="date" id="inputFecha"
+                                                    formControlName="fechaSelected" class="form-control" />
+                                            </div> -->
+                                            <div class="form-group">
+                                                <input type="text" id="inputAsunto" class="form-control"
+                                                    formControlName="asuntoSelected" placeholder="Asunto:">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="inputCuerpo" class="form-control" rows="4"
+                                                    formControlName="cuerpoSelected"></textarea>
+                                            </div>
+
+                                            <div class="col-md-12 text-right">
+                                                <button type="button" class="btn btn-info btn-sm" (click)="update()">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                    Editar </button>
+
+                                                <button type="button" class="btn btn-danger btn-sm" (click)="delete()">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                    Eliminar
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- Termina Visualizar plantilla seleccionada -->
+                            <!-- Agregar Pacientes a plantilla -->
+                            <div class="col-md-8" *ngIf="modalAgregarPacientes">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Agregar Pacientes
+                                            <span class="icono">
+                                                <i class="fa-solid fa-users"></i>
+                                            </span>
+                                        </h3>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <form [formGroup]="RelacionPlantillaPacienteForm" method="post">
+                                            <div class="col-md-12">
+                                                <div class="card-body col-md-12">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-group d-flex justify-content-end">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            formControlName="pacientesTipo"
+                                                                            value="activos" id="pActivos">
+                                                                        <label class="form-check-label"
+                                                                            for="pActivos">Pacientes Activos</label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            formControlName="pacientesTipo"
+                                                                            value="inactivos" id="pInactivos">
+                                                                        <label class="form-check-label"
+                                                                            for="pInactivos">Pacientes Inactivos</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <input type="hidden" formControlName="idPlantPac">
+                                                                <p><strong>Asunto:</strong> {{
+                                                                    RelacionPlantillaPacienteForm.get('asuntoPlantPac').value
+                                                                    }}</p>
+                                                                <p><strong>Fecha de Envío:</strong>
+                                                                    {{RelacionPlantillaPacienteForm.get('fechaPlantPac').value
+                                                                    }}</p>
+                                                                <p><strong>Cuerpo del Email:</strong>
+                                                                </p>
+                                                                <p>{{
+                                                                    RelacionPlantillaPacienteForm.get('cuerpoPlantPac').value
+                                                                    }}</p>
+                                                            </div>
+
+                                                            <!-- Pacientes Agregados -->
+                                                            <div class="col-md-4">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title">
+                                                                            <i class="fa-solid fa-users-viewfinder"></i>
+                                                                            Pacientes Agregados
+                                                                        </h3>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="pacientes-container"
+                                                                            *ngIf="pacientesVinculados && pacientesVinculados.length > 0; else noVinculados">
+                                                                            <ul class="no-bullets">
+                                                                                <li
+                                                                                    *ngFor="let paciente of pacientesVinculados">
+                                                                                    <i class="icono-agregar fa-solid fa-user-minus icono"
+                                                                                        (click)="devincularPaciente(paciente)"
+                                                                                        style="cursor: pointer; margin-left: 10px;"></i>
+                                                                                    <span>{{paciente.nombrePaciente}}
+                                                                                        <br><br></span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <ng-template #noVinculados>
+                                                                            <p>No existen pacientes vinculados a la
+                                                                                plantilla
+                                                                                actualmente.</p>
+                                                                        </ng-template>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Pacientes-->
+                                                            <div class="col-md-4">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h3 class="card-title .colorPActivos">
+                                                                            <i class={{iconoHeaderPacientes}}></i>
+                                                                            {{headerPacientes}}
+                                                                        </h3>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="pacientes-container">
+                                                                            <div *ngFor="let paciente of allPacientes">
+                                                                                <ul class="no-bullets">
+                                                                                    <li><i class="icono-agregar fa-solid fa-user-plus icono"
+                                                                                            (click)="agregarPaciente(paciente)"
+                                                                                            style="cursor: pointer; margin-left: 10px;"></i>
+                                                                                        <span>{{paciente.nombre}}
+                                                                                            <br><br></span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div> <!-- Cierre de row -->
+                                                        <div class="col-sm-4">
+                                                            <button type="button"
+                                                                class="btn btn-block btn-outline-primary"
+                                                                (click)="guardarnuevosVinculos()"
+                                                                [disabled]="isButtonDisabled">
+                                                                Guardar <span
+                                                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                                    {{pacientesVinculados.length}}
+                                                                    <span class="visually-hidden">Pacientes
+                                                                        vinculados</span>
+                                                                </span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Termina Agregar Pacienetes a plantilla -->
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="nuevaPlantila">
+                        <div class="col-md-12">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Agregar Plantilla
+                                        <span class="icono">
+                                            <i class="fa-solid fa-address-card"></i>
+                                        </span>
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <form [formGroup]="agregarPForm" method="post">
+                                        <div class="form-group">
+                                            <input type="text" id="inputName" class="form-control"
+                                                formControlName="name" placeholder="Nombre de la plantilla:">
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label for="inputFecha">Fecha para enviar plantilla</label>
+                                            <input #input type="date" id="inputFecha" formControlName="fecha"
+                                                class="form-control" />
+                                        </div> -->
+                                        <div class="form-group">
+                                            <input type="text" id="inputAsunto" class="form-control"
+                                                formControlName="asunto" placeholder="Asunto:">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea id="inputCuerpo" class="form-control" rows="4"
+                                                formControlName="cuerpo"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-12 ml-auto">
+                                <button (click)="addNew()" type="button" class="btn btn-primary btn-block " [disabled]="isButtonAgregarDisabled"> <i
+                                        class="fa-solid fa-envelope"></i>
+                                    Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="lottie-container" *ngIf="showLoading">
+    <ng-container>
+        <app-loading></app-loading>
+    </ng-container>
+</div>

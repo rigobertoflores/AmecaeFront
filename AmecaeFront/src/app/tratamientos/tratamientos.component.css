@@ -1,0 +1,25 @@
+.link-like {
+    color: #007bff; /* Color azul típico de los enlaces */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    text-decoration: underline; /* Subraya el texto para simular un enlace */
+  }
+
+  .texto:hover {
+    color: #1f68f1; /* Azul oscuro */
+    cursor: pointer; /* Cambia el cursor a una mano cuando pasa sobre el texto */
+  }
+/* 
+  /* .lottie-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Usa fixed o absolute según la necesidad */
+    /* top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo semi-transparente opcional */
+    /* z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+    .content-header {
+      padding: 60px 10px 10px 10px !important;
+  }

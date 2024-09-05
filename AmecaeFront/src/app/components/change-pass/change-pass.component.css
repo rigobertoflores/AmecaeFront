@@ -1,0 +1,12 @@
+.is-invalid {
+    border: 1px solid red;
+  }
+
+  .link-like {
+    color: #007bff; /* Color azul típico de los enlaces */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    text-decoration: underline; /* Subraya el texto para simular un enlace */
+  }
+  .content-header {
+    padding: 60px 10px 10px 10px !important;
+}

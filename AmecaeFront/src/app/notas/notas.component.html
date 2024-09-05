@@ -1,0 +1,56 @@
+<div class="timeline timeline-inverse">
+
+    <div class="time-label">
+    <span class="bg-danger">
+    {{fechaActual}}
+    </span>
+    </div>   
+    
+    <div>
+    <i class="fas fa-envelope bg-primary"></i>
+    <div class="timeline-item">
+    <h3 class="timeline-header"><a href="#">Agregar </a>Nota</h3>
+    <div class="timeline-body">
+        <ckeditor [config]="{ toolbar: [  'heading', '|',
+        'bold', 'italic', '|',
+        'bulletedList', 'numberedList', '|',
+        'outdent', 'indent', '|',
+        'blockQuote', '|',
+        'undo', 'redo', '|',
+        'alignment'] }" tagName="textarea" [editor]="Editor" [(ngModel)]="data" ></ckeditor>
+    </div>
+    <div class="timeline-footer">
+    <button type="button" class="btn btn-success btn-sm" (click)="printContent(data)" [disabled]="clave == '0'">Imprimir</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)="guardarEditarreceta([0,data])" [disabled]="clave == '0'">Guardar</button>
+    <!-- Mensaje de aviso -->
+    <div *ngIf="clave == '0'" class="alert alert-warning mt-2">
+        Los botones se habilitaran cuando guarde la información general del paciente.
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    <div *ngFor="let nota of notas">
+    <span class="bg-danger fecha_label">
+        {{nota.fecha}}
+    </span>
+    <br/>
+    <div class="timeline-item">
+    <div class="timeline-body">
+        <ckeditor [config]="{ toolbar: [  'heading', '|',
+        'bold', 'italic', '|',
+        'bulletedList', 'numberedList', '|',
+        'outdent', 'indent', '|',
+        'blockQuote', '|',
+        'undo', 'redo', '|',
+        'alignment'] }" tagName="textarea" [editor]="Editor"  [(ngModel)]="nota.notas" [id]="nota.id"></ckeditor>
+    </div>
+    <div class="timeline-footer">
+    <button type="button" class="btn btn-success btn-sm" (click)="printContent(nota.notas)">Imprimir</button>
+    <button type="button" class="btn btn-warning btn-flat btn-sm" (click)="guardarEditarreceta([nota.id,nota.notas])">Editar</button>
+    <button type="button" class="btn btn-danger btn-sm"(click)="borrarreceta([nota.id,nota.notas])">Borrar</button>
+    </div>
+    </div>
+    </div>   
+  </div>

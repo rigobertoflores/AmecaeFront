@@ -1,0 +1,122 @@
+
+<div class="wrapper">
+<app-menu></app-menu>
+<app-sidebar></app-sidebar>
+<body class="register-page" style="min-height: 540px;">
+  <div class="register-box">
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center"  style="padding: 0; overflow: hidden;">
+        <img src="../../assets/logo_extendido.jpg" alt="AMECAE Logo" style="width: 100%; height: auto; display: block;">
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">Registre a un nuevo miembro</p>
+        <form [formGroup]="registerform" method="post">
+
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" formControlName="email" required="">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" required="">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Repita contraseña" formControlName="repeatPassword"
+              required="">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <!-- <div *ngIf="registerform.errors?.passwordMismatch && registerform.get('repeatPassword')?.touched" class="error">
+    Las contraseñas deben coincidir.
+  </div> -->
+          <div class="row">
+
+            <div class="col-md-12">
+              <button type="submit" (click)="registerUser()" class="btn btn-primary btn-block">Registar</button>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</body>
+<div class="lottie-container" *ngIf="showLoading">
+  <ng-container>
+    <app-loading></app-loading>
+  </ng-container>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="register-box">
+    <div class="login-logo">
+      <a href="#"><b>Mi</b>Aplicación</a>
+    </div>
+    <!-- /.login-logo -->
+<!-- <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Regístrese</p>
+  
+        <div [formGroup]="formReg">
+            <div>
+              <label for="email">Correo electrónico:</label>
+              <input type="email" id="email" name="email" formControlName="email" required>
+            </div>
+            <div>
+              <label for="password">Contraseña:</label>
+              <input type="password" id="password" name="password" formControlName="password" required>
+            </div>
+            <button type="submit">Registrarse</button>
+          </div>
+           -->
+
+<!-- Agrega aquí más contenido si es necesario -->
+
+<!-- </div> -->
+<!-- /.login-card-body -->
+<!-- </div>
+  </div> -->
+-->

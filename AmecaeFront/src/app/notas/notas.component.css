@@ -1,0 +1,15 @@
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 250px;
+}
+
+.fecha_label {
+  border-radius: 4px;
+  background-color: #fff;
+  display: inline-block;
+  font-weight: 600;
+  padding: 5px;
+}
+
+.content-header {
+  padding: 60px 10px 10px 10px !important;
+}

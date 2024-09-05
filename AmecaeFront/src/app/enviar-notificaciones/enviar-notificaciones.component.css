@@ -1,0 +1,19 @@
+.no-bullets {
+    list-style-type: none;
+    /* Elimina las viñetas */
+    padding: 0;
+    /* Opcional: elimina el padding por defecto */
+    margin: 0;
+    /* Opcional: elimina el margin por defecto */
+}
+
+.plantilla-nombre {
+    flex-grow: 1;
+    /* Ocupa el espacio disponible */
+    
+}
+
+.icono {
+    margin-right: 10px;
+    /* Espacio entre el icono y el nombre */
+}

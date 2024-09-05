@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-12 colsm-12">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="historiaSelect">Selecciona una Historia</label>
+                <select id="historiaSelect" class="form-control" [(ngModel)]="historiaSeleccionada"
+                    [ngModelOptions]="{standalone: true}">
+                    <option value="0">-- Seleccione una historia --</option>
+                    <option *ngFor="let historia of historias" [value]="historia.id">{{ historia.nombre }}</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" (click)="guardarHistoriaExpediente()">Agregar
+                Historia</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 colsm-12">
+
+        <div class="card-body">
+            <div class="form-group">
+                <label for="nombreinput">Expediente</label>
+                <textarea class="texthistoria" id="nombreinputtexthistoria"
+                    [(ngModel)]="expediente.expediente1" class="form-control"
+                    (input)="ajustarAltura($event.target)"></textarea>
+                <br>
+                <button type="button" class="btn btn-success btn-block"
+                    (click)="printContent(expediente?.expediente1)" [disabled]="parametro == '0'">Imprimir</button>
+                <button type="button" class="btn btn-primary btn-block"
+                    (click)="guardarHistoriadentroExpediente()" [disabled]="parametro == '0'">Guardar Historia</button>
+                    <!-- Mensaje de aviso -->
+                    <div *ngIf="parametro == '0'" class="alert alert-warning mt-2">
+                        Los botones se habilitaran cuando guarde la información general del paciente.
+                    </div>
+            </div>
+        </div>
+
+    </div>
+</div>

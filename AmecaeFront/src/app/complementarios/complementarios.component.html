@@ -1,0 +1,45 @@
+<div class="col-12">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h4 class="card-title">Complementarios del paciente</h4>
+        </div>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="image-grid">
+                    <div *ngFor="let documento of documentos" class="image-container">
+                        <img [src]="documento.src" [alt]="documento.alt"
+                            (click)="openDialog(documento.src)">
+                            <span class="fas fa-trash delete-icon" (click)="deleteComplementario(documento.id)"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputFile">Subir Complementario</label>
+                    <div class="input-group">
+                        <div class="custom-file mr-3">
+                           <input #input type="file" class="custom-file-input"
+                                id="exampleInputFile"
+                                (change)="onFileSelected($event)">
+                            <label class="custom-file-label"
+                                for="exampleInputFile">{{selectedFile?.name}}</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-primary"
+                                (click)="upload()" [disabled]="parametro == '0'">Guardar Archivo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mensaje de aviso -->
+            <div *ngIf="parametro == '0'" class="alert alert-warning mt-2">
+                Los botones se habilitaran cuando guarde la información general del paciente.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="lottie-container" *ngIf="showLoading">
+    <ng-container>
+        <app-loading></app-loading>
+    </ng-container>
+</div>

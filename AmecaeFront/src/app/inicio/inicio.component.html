@@ -1,0 +1,135 @@
+<div class="wrapper">
+    <app-menu></app-menu>
+    <app-sidebar></app-sidebar>
+    <div class="container-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Pacientes</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item">Fecha actual</li>
+                            <li class="breadcrumb-item active">{{ fechaFormateada }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body box-profile">
+                                <div class="text-center">
+                                    <img class="profile-user-img img-fluid img-circle"
+                                        [src]="images != null ? images.src: 'assets/paciente.png'"
+                                        [alt]="images !=undefined ? images.alt: ''" />
+                                </div>
+                                <h3 class="profile-username text-center">{{ nombre }}</h3>
+                                <p class="text-muted text-center">Edad:{{ edad >= 0 ? edad : ' Desconocida' }}</p>
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b>Última consulta</b>
+                                        <a class="float-right">{{ fecha_ultimaconsulta }}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Teléfono</b> <a class="float-right">{{ telefono }}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Email</b> <a class="float-right">{{ email }}</a>
+                                    </li>
+                                </ul>
+                                <button (click)="editarElemento(clave)"
+                                    class="btn btn-primary btn-block"><b>Expediente</b></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row justify-content-end">
+                                        <div class="search-box">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Buscar</mat-label>
+                                                <input matInput (keyup)="applyFilter($event)">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mat-elevation-z8 table-responsive">
+                                                <table mat-table [dataSource]="dataSource" matSort
+                                                    (matSortChange)="announceSortChange($event)">
+                                                    <ng-container matColumnDef="fecha_proximaconsulta">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                                            sortActionDescription="Ordenar por fecha">
+                                                            Fecha prox.Consulta
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{ element.fechaConsulta | date: 'MM/dd/yyyy' }}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- Position Column -->
+                                                    <ng-container matColumnDef="nombre">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                                            sortActionDescription="Ordenar por Nombre">
+                                                            Nombre
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{ element.nombre }}
+                                                        </td>
+                                                    </ng-container>
+
+                                                    <!-- Name Column -->
+                                                    <ng-container matColumnDef="sexo">
+                                                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                                            sortActionDescription="Ordenar por sexo">
+                                                            Sexo
+                                                        </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            {{ element.sexo }}
+                                                        </td>
+                                                    </ng-container>
+                                                    <ng-container matColumnDef="editar">
+                                                        <th mat-header-cell *matHeaderCellDef> Expediente </th>
+                                                        <td mat-cell *matCellDef="let element">
+                                                            <button class="buttonedit" mat-icon-button
+                                                                (click)="editarElemento(element.clave)">
+                                                                <mat-icon>edit</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                    </ng-container>
+                                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                                                </table>
+
+                                                <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons
+                                                    aria-label="Select page of periodic elements">
+                                                </mat-paginator>
+                                            </div>
+                                            <br />
+                                            <button (click)="agregarPaciente()"
+                                                class="btn btn-primary btn-block"><b>Agregar Nuevo Paciente</b></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="lottie-container" *ngIf="showLoading">
+    <ng-container>
+        <app-loading></app-loading>
+    </ng-container>
+</div>

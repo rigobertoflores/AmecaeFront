@@ -1,0 +1,182 @@
+<div class="wrapper">
+    <app-menu></app-menu>
+    <app-sidebar></app-sidebar>
+    <div class="container-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Tratamientos</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link active" href="#mostrarTratamiento"
+                                            data-toggle="tab">Tratamientos</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="#agregarTratamiento"
+                                            data-toggle="tab">Agregar un
+                                            nuevo
+                                            tratamiento</a></li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="mostrarTratamiento">
+                                        <div class="container-fluid">
+                                            <h2 class="text-center display-4">Buscar Tratamiento</h2>
+                                            <div class="row">
+                                                <div class="col-md-8 offset-md-2">
+                                                    <form [formGroup]="buscarTratamientosForm" method="post">
+                                                        <div class="input-group">
+                                                            <input type="search" class="form-control form-control-lg"
+                                                                placeholder="Escriba aquí"
+                                                                formControlName="buscarTratamiento">
+                                                            <div class="input-group-append">
+                                                                <button type="submit" class="btn btn-lg btn-default">
+                                                                    <i class="fa fa-search"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-4">
+                                            <div class="col-md-6">
+                                                <div class="card card-primary">
+                                                    <div class="card-body">
+                                                        <h2> Tratamientos</h2>
+                                                        <ul>
+                                                            <li *ngFor="let tratamiento of treatments"
+                                                                class="texto pt-2" (click)="viewDetails(tratamiento)">
+                                                                <span class="icono"><i
+                                                                        class="fa-solid fa-transporter-empty"></i></span>
+                                                                {{ tratamiento.nombre }}<br>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                            <div class="col-md-6" *ngIf="tratamientoSeleccionado">
+                                <div class="card card-primary">
+                                    <div class="card-body">
+                                        <form [formGroup]="mostrarTratamientosForm" method="post">
+                                            <input type="hidden" formControlName="idV">
+                                            <div class="form-group">
+                                                <label for="inputNameMostrar">Nombre del tratamiento</label>
+                                                <input type="text" id="inputNameMostrar" class="form-control"
+                                                    formControlName="nameV">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPalabrasMostrar">Palabras claves</label>
+                                                <input type="text" id="inputPalabrasMostrar" class="form-control"
+                                                    formControlName="wordsV">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputDescriptionMostrar">Descripción Enfermedad</label>
+                                                <textarea id="inputDescriptionMostrar" class="form-control" rows="4"
+                                                    formControlName="descriptionV"></textarea>
+                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="inputTratamientoMostrar">Tratamiento</label>
+                                                                <textarea id="inputTratamientoMostrar"
+                                                                    class="form-control" rows="4"
+                                                                    formControlName="treatmentsV"></textarea>
+                                                            </div>
+                                                            <div class="col-md-12 text-right">
+
+                                                                <button type="button" class="btn btn-info btn-sm"
+                                                                    (click)="update()">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                    Editar </button>
+
+                                                                <button type="button" class="btn btn-danger btn-sm"
+                                                                    (click)="delete()">
+                                                                    <i class="fas fa-trash">
+                                                                    </i>
+                                                                    Eliminar
+                                                                </button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="tab-pane" id="agregarTratamiento">
+                                        <div class="col-md-12">
+                                            <div class="card card-primary">
+                                                <div class="card-body">
+                                                    <form [formGroup]="tratamientosForm" method="post">
+                                                        <div class="form-group">
+                                                            <label for="inputName">Nombre del tratamiento</label>
+                                                            <input type="text" id="inputName" class="form-control"
+                                                                formControlName="name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="inputPalabras">Palabras claves</label>
+                                                            <input type="text" id="inputPalabras" class="form-control"
+                                                                formControlName="words">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="inputDescription">Descripción Enfermedad</label>
+                                                            <textarea id="inputDescription" class="form-control"
+                                                                rows="4" formControlName="description"></textarea>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="inputTratamiento">Tratamiento</label>
+                                                            <textarea id="inputTratamiento" class="form-control"
+                                                                rows="4" formControlName="treatments"></textarea>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="col-md-2 ml-auto">
+                                                <button (click)="addNew()" type="button"
+                                                    class="btn btn-primary btn-block "> <i class="fa-solid fa-plus"></i>
+                                                    Agregar</button>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="lottie-container" *ngIf="Loading">
+        <ng-container>
+            <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+        </ng-container>
+    </div>
