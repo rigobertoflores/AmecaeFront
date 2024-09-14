@@ -8,13 +8,13 @@ import { FotoPaciente } from '../interface/FotoPaciente';
   providedIn: 'root',
 })
 export class Service {
-  private api = 'https://localhost:7210/CliniaOv/CliniaOvController/';
-  private apiTratamientos =
-    'https://localhost:7210/api/Tratamientos/TratamientosController/';
-  // private api =
-  //   'https://clinicaolivera.azurewebsites.net/CliniaOv/CliniaOvController/';
+  // private api = 'https://localhost:7210/CliniaOv/CliniaOvController/';
   // private apiTratamientos =
-  //   'https://clinicaolivera.azurewebsites.net/api/Tratamientos/TratamientosController/';
+  //   'https://localhost:7210/api/Tratamientos/TratamientosController/';
+  private api =
+    'https://apiamecae-h7fverbshphnbycs.eastus2-01.azurewebsites.net/CliniaOv/CliniaOvController/';
+  private apiTratamientos =
+    'https://apiamecae-h7fverbshphnbycs.eastus2-01.azurewebsites.net/api/Tratamientos/TratamientosController/';
 
   constructor(private http: HttpClient) {}
 
