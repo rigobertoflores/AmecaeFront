@@ -1,8 +1,8 @@
 export enum UrlsBackend {
-  ApiPacientes = 'https://clinicaolivera.azurewebsites.net/CliniaOv/CliniaOvController/',
-  ApiTratamientos = 'https://clinicaolivera.azurewebsites.net/api/Tratamientos/TratamientosController/',
-  ApiNotificacion = 'https://clinicaolivera.azurewebsites.net/api/NotificationEmail/NotificationEmailController/',
-  ApiAuth = 'https://clinicaolivera.azurewebsites.net/api/Authentication/AuthenticationController/',
+  ApiPacientes = 'https://apiamecae-h7fverbshphnbycs.eastus2-01.azurewebsites.net/CliniaOv/CliniaOvController/',
+  ApiTratamientos = 'https://apiamecae-h7fverbshphnbycs.eastus2-01.azurewebsites.net/api/Tratamientos/TratamientosController/',
+  ApiNotificacion = 'https://apiamecae-h7fverbshphnbycs.eastus2-01.azurewebsites.net/api/NotificationEmail/NotificationEmailController/',
+  ApiAuth = 'https://apiamecae-h7fverbshphnbycs.eastus2-01.azurewebsites.net/api/Authentication/AuthenticationController/',
 }
 
 export enum UrlsTratamientos {
