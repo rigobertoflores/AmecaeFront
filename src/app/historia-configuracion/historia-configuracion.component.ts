@@ -41,6 +41,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
   dia: any = this.fechaActual.getDate();
   mes: any = this.fechaActual.getMonth() + 1; // Los meses empiezan en 0
   año: number = this.fechaActual.getFullYear();
+  public mostrarBotonEliminar: boolean = false; // Cambia este valor para mostrar o no el botón
 
   ajustarAltura(elemento: HTMLTextAreaElement): void {
     elemento.style.height = 'auto'; // Resetea la altura para calcular correctamente
@@ -94,7 +95,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000,
       });
-       this.showLoading = false;
+      this.showLoading = false;
     }
   }
 
@@ -119,11 +120,14 @@ export class HistoriaConfiguracionComponent implements OnInit {
       this.historiaform.get('hc')?.setValue(''); // Contenido de la historia
       this.historiaform.get('id')?.setValue(0); // ID de la historia
       this.historiaform.get('nombre')?.setValue(''); // No
+        this.mostrarBotonEliminar = false;
     } else {
       const histo = this.historias.find(
         (historia) => historia.id == this.historiaSeleccionada
       );
       if (histo != null) {
+       this.mostrarBotonEliminar= true; // Cambia este valor para mostrar o no el botón
+
         this.historiaform.get('hc')?.setValue(histo.hc); // Contenido de la historia
         this.historiaform.get('id')?.setValue(histo.id); // ID de la historia
         this.historiaform.get('nombre')?.setValue(histo.nombre); // Nombre de la historia
@@ -202,6 +206,48 @@ export class HistoriaConfiguracionComponent implements OnInit {
         ? newCursorPosition
         : textarea.value.length;
     textarea.setSelectionRange(adjustedPosition, adjustedPosition);
+  }
+
+  eliminarHistoria() {
+    if (this.historiaSeleccionada != 0) { 
+      this.showLoading = true;
+      if (!this.historiaform.invalid) {
+        const historia: Historia = {
+          id: this.historiaform.get('id')?.value || 0,
+          hc: this.historiaform?.get('hc')?.value,
+          nombre: this.historiaform.get('nombre')?.value,
+        };
+        this.Service.postData('DeleteHistoria', historia).subscribe(
+          (result: Historia[]) => {
+            this.data = '';
+            this.listahistorias = result;
+            this.historias = result;
+            this.historiaform.get('hc')?.setValue(''); // Contenido de la historia
+            this.historiaform.get('id')?.setValue(0); // ID de la historia
+            this.historiaform.get('nombre')?.setValue(''); // No
+            this.historiaSeleccionada = 0;
+            this.showLoading = false;
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Se ha eliminado la historia correctamente',
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          }
+        );
+      } else {
+        Swal.fire({
+          position: 'center',
+          icon: 'info',
+          title: 'El formulario no es vàlido',
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        this.showLoading = false;
+      }
+    }
+
   }
 }
 

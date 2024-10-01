@@ -41,6 +41,7 @@ export class InformesoConfiguracionComponent implements OnInit {
   dia: any = this.fechaActual.getDate();
   mes: any = this.fechaActual.getMonth() + 1; // Los meses empiezan en 0
   año: number = this.fechaActual.getFullYear();
+  public mostrarBotonEliminar: boolean = false;
 
   ajustarAltura(elemento: HTMLTextAreaElement): void {
     elemento.style.height = 'auto'; // Resetea la altura para calcular correctamente
@@ -119,11 +120,13 @@ export class InformesoConfiguracionComponent implements OnInit {
       this.informeform.get('informe')?.setValue(''); // Contenido de la historia
       this.informeform.get('id')?.setValue(0); // ID de la historia
       this.informeform.get('nombre')?.setValue(''); // No
+      this.mostrarBotonEliminar = false; // Cambia este valor para mostrar o no el botón
     } else {
       const inf = this.informe.find(
         (info) => info.id == this.informeeleccionada
       );
       if (inf != null) {
+        this.mostrarBotonEliminar = true; // Cambia este valor para mostrar o no el botón
         this.informeform.get('informe')?.setValue(inf.informe); // Contenido de la historia
         this.informeform.get('id')?.setValue(inf.id); // ID de la historia
         this.informeform.get('nombre')?.setValue(inf.nombre); // Nombre de la historia
@@ -137,6 +140,42 @@ export class InformesoConfiguracionComponent implements OnInit {
           0
         );
       }
+    }
+  }
+
+  eliminarInforme() {
+    if (!this.informeform.invalid) {
+      const infor: informeoperatorio = {
+        id: this.informeform.get('id')?.value || 0,
+        informe: this.informeform?.get('informe')?.value,
+        nombre: this.informeform.get('nombre')?.value,
+      };
+      this.Service.postData('DeleteInforme', infor).subscribe(
+        (result: informeoperatorio[]) => {
+          this.data = '';
+          this.listainforme = result;
+          this.informe = result;
+          this.informeform.get('informe')?.setValue(''); // Contenido de la historia
+          this.informeform.get('id')?.setValue(0); // ID de la historia
+          this.informeform.get('nombre')?.setValue(''); // No
+          this.informeeleccionada = 0;
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Se ha eliminado correctamente el informe',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      );
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'info',
+        title: 'El formulario no es vàlido',
+        showConfirmButton: false,
+        timer: 2000,
+      });
     }
   }
 }
