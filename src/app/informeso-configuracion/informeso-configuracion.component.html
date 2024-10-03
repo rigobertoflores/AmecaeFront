@@ -1,6 +1,6 @@
 <div class="wrapper">
-<app-menu></app-menu>
-<app-sidebar></app-sidebar>
+    <app-menu></app-menu>
+    <app-sidebar></app-sidebar>
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -37,14 +37,17 @@
                                             <div class="col-sm-6">
 
                                                 <div class="form-group">
-                                                    <label for="historiaSelect">Selecciona una Historia</label>
+                                                    <label for="historiaSelect">Selecciona un informe</label>
                                                     <select id="historiaSelect" class="form-control"
-                                                            [(ngModel)]="informeeleccionada" [ngModelOptions]="{standalone: true}" (change)="onInformeChange($event)">
-                                                      <option value="0">-- Seleccione una historia --</option>
-                                                      <option *ngFor="let infor of informe" [value]="infor.id">{{ infor.nombre }}</option>
+                                                        [(ngModel)]="informeeleccionada"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        (change)="onInformeChange($event)">
+                                                        <option value="0">-- Seleccione un informe --</option>
+                                                        <option *ngFor="let infor of informe" [value]="infor.id">{{
+                                                            infor.nombre }}</option>
                                                     </select>
-                                                  </div>
-                                                  
+                                                </div>
+
 
                                             </div>
                                         </div>
@@ -56,14 +59,17 @@
                             <div class="col-md-12 col-sm-12">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="nombreinput">Historia</label>
-                                        <textarea class="texthistoria" id="nombreinputtexthistoria" formControlName="informe"
-                                            class="form-control" (input)="ajustarAltura($event.target)"></textarea>
+                                        <label for="nombreinput">Plantilla del Informe</label>
+                                        <textarea class="texthistoria" id="nombreinputtexthistoria"
+                                            formControlName="informe" class="form-control"
+                                            (input)="ajustarAltura($event.target)"
+                                            style="font-family: 'Courier New', monospace;"></textarea>
                                         <br>
                                         <button type="button" class="btn btn-primary btn-block"
                                             (click)="guardarEditarInforme()">Guardar</button>
-                                            <button *ngIf="mostrarBotonEliminar" type="button" class="btn btn-danger btn-block"
-                                                (click)="eliminarInforme()">Eliminar</button>
+                                        <button *ngIf="mostrarBotonEliminar" type="button"
+                                            class="btn btn-danger btn-block"
+                                            (click)="eliminarInforme()">Eliminar</button>
                                     </div>
                                 </div>
                             </div>

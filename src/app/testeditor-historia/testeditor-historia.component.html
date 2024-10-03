@@ -23,7 +23,7 @@
                 <label for="nombreinput">Expediente</label>
                 <textarea class="texthistoria" id="nombreinputtexthistoria"
                     [(ngModel)]="expediente.expediente1" class="form-control"
-                    (input)="ajustarAltura($event.target)"></textarea>
+                    (input)="ajustarAltura($event.target)" style="font-family: 'Courier New', monospace;"></textarea>
                 <br>
                 <button type="button" class="btn btn-success btn-block"
                     (click)="printContent(expediente?.expediente1)" [disabled]="parametro == '0'">Imprimir</button>
