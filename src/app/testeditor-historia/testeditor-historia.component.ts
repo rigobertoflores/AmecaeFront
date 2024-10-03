@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, HostListener, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -147,70 +153,6 @@ export class TesteditorHistoriaComponent implements OnInit, AfterViewInit {
     // }
   }
 
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    const textarea = document.getElementById(
-      'nombreinputtexthistoria'
-    ) as HTMLTextAreaElement;
-    if (!textarea) return;
-
-    const cursorPosition = textarea.selectionStart;
-    const lines = textarea.value.substr(0, cursorPosition).split('\n');
-    const currentLineIndex = lines.length - 1;
-    const currentLine = lines[currentLineIndex];
-
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      this.moveCursorUp(textarea, currentLineIndex, cursorPosition, lines);
-    } else if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      this.moveCursorDown(
-        textarea,
-        currentLineIndex,
-        cursorPosition,
-        lines,
-        currentLine.length
-      );
-    }
-  }
-
-  private moveCursorUp(
-    textarea: HTMLTextAreaElement,
-    currentLineIndex: number,
-    cursorPosition: number,
-    lines: string[]
-  ) {
-    if (currentLineIndex === 0) return; // Ya está en la primera línea
-
-    const previousLineLength = lines[currentLineIndex - 1].length;
-    const newCursorPosition =
-      cursorPosition - lines[currentLineIndex].length - 1;
-
-    // Asegurar que la nueva posición no sea negativa
-    const adjustedPosition = newCursorPosition >= 0 ? newCursorPosition : 0;
-    textarea.setSelectionRange(adjustedPosition, adjustedPosition);
-  }
-
-  private moveCursorDown(
-    textarea: HTMLTextAreaElement,
-    currentLineIndex: number,
-    cursorPosition: number,
-    lines: string[],
-    currentLineLength: number
-  ) {
-    const nextLines = textarea.value.substr(cursorPosition).split('\n');
-    if (nextLines.length <= 1) return; // Ya está en la última línea
-
-    const newCursorPosition = cursorPosition + currentLineLength + 1;
-
-    // Asegurar que la nueva posición no exceda la longitud del valor del textarea
-    const adjustedPosition =
-      newCursorPosition <= textarea.value.length
-        ? newCursorPosition
-        : textarea.value.length;
-    textarea.setSelectionRange(adjustedPosition, adjustedPosition);
-  }
-
   printContent(content: string) {
     let contenidoHTML = content.replace(/\n/g, '<br>');
     let printWindow = window.open('', '_blank', 'width=800,height=600');
@@ -238,5 +180,75 @@ export class TesteditorHistoriaComponent implements OnInit, AfterViewInit {
       printWindow!!.print();
       printWindow!!.close();
     }, 1000); // Espera 1 segundo para asegurarse de que todo se carga correctamente
+  }
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    const textarea = document.getElementById(
+      'nombreinputtexthistoria'
+    ) as HTMLTextAreaElement;
+    if (!textarea) return;
+
+    const cursorPosition = textarea.selectionStart;
+    const lines = textarea.value.split('\n'); // Dividimos todo el texto en líneas
+    const currentLineIndex = lines.findIndex(
+      (line) =>
+        textarea.selectionStart <= textarea.value.indexOf(line) + line.length
+    ); // Obtener la línea actual
+
+    // Obtener la posición del primer asterisco en la primera línea
+    const firstAsteriskPosition = lines[0].indexOf('*');
+    if (firstAsteriskPosition === -1) return; // Si no hay asterisco, no hacemos nada
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      this.moveCursorUp(textarea, currentLineIndex, firstAsteriskPosition);
+    } else if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      this.moveCursorDown(
+        textarea,
+        currentLineIndex,
+        lines.length,
+        firstAsteriskPosition
+      );
+    }
+  }
+
+  private moveCursorUp(
+    textarea: HTMLTextAreaElement,
+    currentLineIndex: number,
+    asteriskPosition: number
+  ) {
+    if (currentLineIndex === 0) return; // Ya está en la primera línea
+
+    const previousLineStart =
+      textarea.value.split('\n').slice(0, currentLineIndex).join('\n').length +
+      1; // Longitud de las líneas anteriores para ajustar la posición
+
+    // Posicionar el cursor justo después del asterisco en la línea anterior
+    textarea.setSelectionRange(
+      previousLineStart + asteriskPosition + 1,
+      previousLineStart + asteriskPosition + 1
+    );
+  }
+
+  private moveCursorDown(
+    textarea: HTMLTextAreaElement,
+    currentLineIndex: number,
+    totalLines: number,
+    asteriskPosition: number
+  ) {
+    if (currentLineIndex >= totalLines - 1) return; // Ya está en la última línea
+
+    const nextLineStart =
+      textarea.value
+        .split('\n')
+        .slice(0, currentLineIndex + 1)
+        .join('\n').length + 1; // Longitud de las líneas anteriores para ajustar la posición
+
+    // Posicionar el cursor justo después del asterisco en la línea siguiente
+    textarea.setSelectionRange(
+      nextLineStart + asteriskPosition + 1,
+      nextLineStart + asteriskPosition + 1
+    );
   }
 }
