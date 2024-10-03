@@ -145,7 +145,7 @@
                                                                                             id="inputFechaDeNacimiento"
                                                                                             class="form-control"
                                                                                             [max]="maxDate"
-                                                                                            [min]="minDate" (change)="onFechaDeNacimientoChange($event)"/>
+                                                                                            [min]="minDate" (change)="onFechaDeNacimientoChange($event)" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-4 colsm-12">
@@ -438,30 +438,100 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputDiabetes">Diabetes</label>
-                                                                                        <input #input type="text"
+                                                                                        <select #input
                                                                                             id="inputDiabetes"
-                                                                                            formControlName="diabetes"
-                                                                                            class="form-control" />
+                                                                                            class="form-control"
+                                                                                            formControlName="diabetes">
+                                                                                            <option value="0">
+                                                                                                Seleccione...</option>
+                                                                                            <option value="Madre">
+                                                                                                Madre
+                                                                                            </option>
+                                                                                            <option value="Padre">
+                                                                                                Padre
+                                                                                            </option>
+                                                                                            <option value="AmbosPadres">
+                                                                                                Ambos padres
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbuelaMaterna">
+                                                                                                Abuela Materna
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbuelaPaterna">
+                                                                                                Abuela Paterna
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbueloMaterno">
+                                                                                                Abuelo Materno
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbueloPaterno">
+                                                                                                Abuelo Paterno
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
                                                                                         <label
-                                                                                            for="inputHipertension">Hipertensión</label>
-                                                                                        <input #input type="text"
-                                                                                            id="inputHipertension"
-                                                                                            formControlName="hipertension"
-                                                                                            class="form-control" />
+                                                                                            for="inputHipertension">Hipertensión</label>                                                                                        
+                                                                                            <select #input id="inputHipertension" class="form-control" formControlName="hipertension">
+                                                                                                <option value="0">
+                                                                                                    Seleccione...</option>
+                                                                                                <option value="Madre">
+                                                                                                    Madre
+                                                                                                </option>
+                                                                                                <option value="Padre">
+                                                                                                    Padre
+                                                                                                </option>
+                                                                                                <option value="AmbosPadres">
+                                                                                                    Ambos padres
+                                                                                                </option>
+                                                                                                <option value="AbuelaMaterna">
+                                                                                                    Abuela Materna
+                                                                                                </option>
+                                                                                                <option value="AbuelaPaterna">
+                                                                                                    Abuela Paterna
+                                                                                                </option>
+                                                                                                <option value="AbueloMaterno">
+                                                                                                    Abuelo Materno
+                                                                                                </option>
+                                                                                                <option value="AbueloPaterno">
+                                                                                                    Abuelo Paterno
+                                                                                                </option>
+                                                                                            </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
                                                                                         <label
-                                                                                            for="inputTrombosis">Trombosis</label>
-                                                                                        <input #input type="text"
-                                                                                            id="inputTrombosis"
-                                                                                            formControlName="trombosis"
-                                                                                            class="form-control" />
+                                                                                            for="inputTrombosis">Trombosis</label>                                                                                        
+                                                                                            <select #input id="inputTrombosis" class="form-control" formControlName="trombosis">
+                                                                                                <option value="0">
+                                                                                                    Seleccione...</option>
+                                                                                                <option value="Madre">
+                                                                                                    Madre
+                                                                                                </option>
+                                                                                                <option value="Padre">
+                                                                                                    Padre
+                                                                                                </option>
+                                                                                                <option value="AmbosPadres">
+                                                                                                    Ambos padres
+                                                                                                </option>
+                                                                                                <option value="AbuelaMaterna">
+                                                                                                    Abuela Materna
+                                                                                                </option>
+                                                                                                <option value="AbuelaPaterna">
+                                                                                                    Abuela Paterna
+                                                                                                </option>
+                                                                                                <option value="AbueloMaterno">
+                                                                                                    Abuelo Materno
+                                                                                                </option>
+                                                                                                <option value="AbueloPaterno">
+                                                                                                    Abuelo Paterno
+                                                                                                </option>
+                                                                                            </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -469,11 +539,32 @@
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
                                                                                         <label
-                                                                                            for="inputCardiopatias">Cardiopatías</label>
-                                                                                        <input #input type="text"
-                                                                                            id="inputCardiopatias"
-                                                                                            formControlName="cardiopatias"
-                                                                                            class="form-control" />
+                                                                                            for="inputCardiopatias">Cardiopatías</label>                                                                                        
+                                                                                            <select #input id="inputCardiopatias" class="form-control" formControlName="cardiopatias">
+                                                                                                <option value="0">
+                                                                                                    Seleccione...</option>
+                                                                                                <option value="Madre">
+                                                                                                    Madre
+                                                                                                </option>
+                                                                                                <option value="Padre">
+                                                                                                    Padre
+                                                                                                </option>
+                                                                                                <option value="AmbosPadres">
+                                                                                                    Ambos padres
+                                                                                                </option>
+                                                                                                <option value="AbuelaMaterna">
+                                                                                                    Abuela Materna
+                                                                                                </option>
+                                                                                                <option value="AbuelaPaterna">
+                                                                                                    Abuela Paterna
+                                                                                                </option>
+                                                                                                <option value="AbueloMaterno">
+                                                                                                    Abuelo Materno
+                                                                                                </option>
+                                                                                                <option value="AbueloPaterno">
+                                                                                                    Abuelo Paterno
+                                                                                                </option>
+                                                                                            </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-4 col-sm-12">
@@ -490,11 +581,32 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputEg">Enfermedades
-                                                                                            genéticas</label>
-                                                                                        <input #input type="text"
-                                                                                            id="inputEg"
-                                                                                            formControlName="enfermedadesGeneticas"
-                                                                                            class="form-control" />
+                                                                                            genéticas</label>                                                                                       
+                                                                                            <select #input id="inputEg" class="form-control" formControlName="enfermedadesGeneticas">
+                                                                                                <option value="0">
+                                                                                                    Seleccione...</option>
+                                                                                                <option value="Madre">
+                                                                                                    Madre
+                                                                                                </option>
+                                                                                                <option value="Padre">
+                                                                                                    Padre
+                                                                                                </option>
+                                                                                                <option value="AmbosPadres">
+                                                                                                    Ambos padres
+                                                                                                </option>
+                                                                                                <option value="AbuelaMaterna">
+                                                                                                    Abuela Materna
+                                                                                                </option>
+                                                                                                <option value="AbuelaPaterna">
+                                                                                                    Abuela Paterna
+                                                                                                </option>
+                                                                                                <option value="AbueloMaterno">
+                                                                                                    Abuelo Materno
+                                                                                                </option>
+                                                                                                <option value="AbueloPaterno">
+                                                                                                    Abuelo Paterno
+                                                                                                </option>
+                                                                                            </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
