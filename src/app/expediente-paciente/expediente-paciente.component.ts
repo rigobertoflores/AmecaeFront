@@ -134,7 +134,7 @@ export class ExpedientePacienteComponent implements OnInit {
         sexo: '',
         fechaDeNacimiento: '', // Considera una fecha predeterminada si es necesario
         nombre: '',
-        estadoCivil: '',
+        estadoCivil: 'NoEspecificado',
         ocupacion: '',
         domicilio: '',
         poblacion: '',
@@ -144,46 +144,48 @@ export class ExpedientePacienteComponent implements OnInit {
         edadDelEsposo: null,
         ocupacionEsposo: '',
         referencia: '',
-        diabetes: '0',
-        hipertension: '0',
-        trombosis: '0',
-        cardiopatias: '0',
+        diabetes: 'NoEspecificado',
+        hipertension: 'No',
+        trombosis: 'NoEspecificado',
+        cardiopatias: 'No',
         cancer: '',
-        enfermedadesGeneticas: '0',
+        enfermedadesGeneticas: '',
         otraEnfermedad: '',
         inmunizaciones: '',
-        alcoholismo: '',
-        tabaquismo: '',
-        tabaquismoPasivo: '',
+        alcoholismo: 'NoEspecificado',
+        tabaquismo: 'NoEspecificado',
+        tabaquismoPasivo: 'NoEspecificado',
         drogasOmedicamentos: '',
         grupoSanguineo: '',
         propiasDeLaInfancia: '',
-        rubeola: '',
-        amigdalitis: '',
+        rubeola: 'No',
+        amigdalitis: 'No',
         bronquitis: '',
-        bronconeumonia: '',
+        bronconeumonia: 'No',
         hepatitisViralTipo: '',
-        parasitosis: '',
-        toxoplasmosis: '',
-        citomegalovirus: '',
+        parasitosis: 'No',
+        toxoplasmosis: 'No',
+        citomegalovirus: 'No',
         herpes: '',
-        clamydiasis: '',
-        hiv: '',
-        sifilis: '',
-        micosis: '',
-        eip: '',
-        diabetesMellitus: '',
+        clamydiasis: 'No',
+        hiv: 'No',
+        sifilis: 'No',
+        micosis: 'No',
+        eip: 'No',
+        diabetesMellitus: 'No',
         otrasEndocrinas: '',
         nefropatias: '',
         digestivas: '',
         neurologicas: '',
         hematologicas: '',
         tumores: '',
-        condilomatosis: '',
+        condilomatosis: 'No',
         displasias: '',
         alergia: '',
         fechaConsulta: '',
         fechaUltimaConsulta: '',
+        cardiopatiaFamiliar: '',
+        hipertensionFamiliar: '',
       };
 
       this.cargarFormulario(pacienteVacio);
@@ -213,6 +215,7 @@ export class ExpedientePacienteComponent implements OnInit {
   }
 
   cargarFormulario(data: Paciente) {
+    console.log(data);
     const today = new Date();
     const formattedDate = today.toISOString().substring(0, 10);
     console.log(today);
@@ -242,6 +245,8 @@ export class ExpedientePacienteComponent implements OnInit {
           ? 'Casado'
           : data.estadoCivil === 'S'
           ? 'Soltero'
+          : data.estadoCivil == ''
+          ? 'NoEspecificado'
           : data.estadoCivil
       ),
       ocupacion: new FormControl(
@@ -257,42 +262,70 @@ export class ExpedientePacienteComponent implements OnInit {
         data.ocupacionEsposo == '' ? 'NoEspecificado' : data.ocupacionEsposo
       ),
       referencia: new FormControl(data.referencia),
-      diabetes: new FormControl(data.diabetes),
-      hipertension: new FormControl(data.hipertension),
-      trombosis: new FormControl(data.trombosis),
-      cardiopatias: new FormControl(data.cardiopatias),
+      diabetes: new FormControl(
+        data.diabetes == '' ? 'NoEspecificado' : data.diabetes
+      ),
+      hipertension: new FormControl(
+        data.hipertension == '' ? 'No' : data.hipertension
+      ),
+      trombosis: new FormControl(
+        data.trombosis == '' ? 'NoEspecificado' : data.trombosis
+      ),
+      cardiopatias: new FormControl(
+        data.cardiopatias == '' ? 'NoEspecificado' : data.cardiopatias
+      ),
+      hipertensionFamiliar: new FormControl(
+        data.hipertensionFamiliar == ''
+          ? 'NoEspecificado'
+          : data.hipertensionFamiliar
+      ),
+      cardiopatiaFamiliar: new FormControl(
+        data.cardiopatiaFamiliar == ''
+          ? 'NoEspecificado'
+          : data.cardiopatiaFamiliar
+      ),
       cancer: new FormControl(data.cancer),
       enfermedadesGeneticas: new FormControl(data.enfermedadesGeneticas),
       otraEnfermedad: new FormControl(data.otraEnfermedad),
       inmunizaciones: new FormControl(data.inmunizaciones),
-      alcoholismo: new FormControl(data.alcoholismo),
+      alcoholismo: new FormControl(
+        data.alcoholismo == '' ? 'NoEspecificado' : data.alcoholismo
+      ),
       tabaquismo: new FormControl(data.tabaquismo),
       tabaquismoPasivo: new FormControl(data.tabaquismoPasivo),
       drogasOmedicamentos: new FormControl(data.drogasOmedicamentos),
-      grupoSanguineo: new FormControl(data.grupoSanguineo),
+      grupoSanguineo: new FormControl(
+        data.grupoSanguineo == '' ? 'NoEspecificado' : data.grupoSanguineo
+      ),
       propiasDeLaInfancia: new FormControl(data.propiasDeLaInfancia),
-      rubeola: new FormControl(data.rubeola),
-      amigdalitis: new FormControl(data.amigdalitis),
+      rubeola: new FormControl(data.rubeola == '' ? 'No' : data.rubeola),
+      amigdalitis: new FormControl(
+        data.amigdalitis == '' ? 'No' : data.amigdalitis
+      ),
       bronquitis: new FormControl(data.bronquitis),
-      bronconeumonia: new FormControl(data.bronconeumonia),
+      bronconeumonia: new FormControl(
+        data.bronconeumonia == '' ? 'No' : data.bronconeumonia
+      ),
       hepatitisViralTipo: new FormControl(data.hepatitisViralTipo),
-      parasitosis: new FormControl(data.parasitosis),
+      parasitosis: new FormControl(
+        data.parasitosis == '' ? 'No' : data.parasitosis
+      ),
       toxoplasmosis: new FormControl(data.toxoplasmosis),
       citomegalovirus: new FormControl(data.citomegalovirus),
       herpes: new FormControl(data.herpes),
       clamydiasis: new FormControl(data.clamydiasis),
-      hiv: new FormControl(data.hiv),
-      sifilis: new FormControl(data.sifilis),
-      micosis: new FormControl(data.micosis),
-      eip: new FormControl(data.eip),
-      diabetesMellitus: new FormControl(data.diabetesMellitus),
+      hiv: new FormControl(data.hiv == '' ? 'NoEspecificado' : data.hiv),
+      sifilis: new FormControl(data.sifilis == '' ? 'No' : data.sifilis),
+      micosis: new FormControl(data.micosis == '' ? 'No' : data.micosis),
+      eip: new FormControl(data.eip == '' ? 'No' : data.eip),
+      diabetesMellitus: new FormControl(data.diabetesMellitus == '' ? 'No' : data.diabetesMellitus),
       otrasEndocrinas: new FormControl(data.otrasEndocrinas),
       nefropatias: new FormControl(data.nefropatias),
       digestivas: new FormControl(data.digestivas),
       neurologicas: new FormControl(data.neurologicas),
       hematologicas: new FormControl(data.hematologicas),
       tumores: new FormControl(data.tumores),
-      condilomatosis: new FormControl(data.condilomatosis),
+      condilomatosis: new FormControl(data.condilomatosis == '' ? 'No' : data.condilomatosis),
       displasias: new FormControl(data.displasias),
       alergia: new FormControl(data.alergia),
       fechaConsulta: new FormControl(

@@ -145,7 +145,8 @@
                                                                                             id="inputFechaDeNacimiento"
                                                                                             class="form-control"
                                                                                             [max]="maxDate"
-                                                                                            [min]="minDate" (change)="onFechaDeNacimientoChange($event)" />
+                                                                                            [min]="minDate"
+                                                                                            (change)="onFechaDeNacimientoChange($event)" />
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-4 colsm-12">
@@ -189,7 +190,7 @@
                                                                                             class="form-control"
                                                                                             formControlName="estadoCivil">
                                                                                             <option
-                                                                                                value="No especificado">
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...</option>
                                                                                             <option value="Soltero">
                                                                                                 Soltero
@@ -219,15 +220,28 @@
                                                                                             <option value="Abogado">
                                                                                                 Abogado(a)
                                                                                             </option>
+                                                                                            <option value="AmaCasa">
+                                                                                                Ama(o) de casa
+                                                                                            </option>
                                                                                             <option
                                                                                                 value="AgenteDeViajes">
                                                                                                 Agente de viajes
+                                                                                            </option>
+                                                                                            <option value="Arquitecto">
+                                                                                                Arquitecto
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="BienesRaices">
+                                                                                                Bienes Raíces
                                                                                             </option>
                                                                                             <option value="Camarero">
                                                                                                 Camarero/Camarera
                                                                                             </option>
                                                                                             <option value="Gobierno">
                                                                                                 Gobierno
+                                                                                            </option>
+                                                                                            <option value="Estudiante">
+                                                                                                Estudiante
                                                                                             </option>
                                                                                             <option value="Profesor">
                                                                                                 Profesor
@@ -374,15 +388,28 @@
                                                                                             <option value="Abogado">
                                                                                                 Abogado(a)
                                                                                             </option>
+                                                                                            <option value="AmaCasa">
+                                                                                                Ama(o) de casa
+                                                                                            </option>
                                                                                             <option
                                                                                                 value="AgenteDeViajes">
                                                                                                 Agente de viajes
+                                                                                            </option>
+                                                                                            <option value="Arquitecto">
+                                                                                                Arquitecto
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="BienesRaices">
+                                                                                                Bienes Raíces
                                                                                             </option>
                                                                                             <option value="Camarero">
                                                                                                 Camarero/Camarera
                                                                                             </option>
                                                                                             <option value="Gobierno">
                                                                                                 Gobierno
+                                                                                            </option>
+                                                                                            <option value="Estudiante">
+                                                                                                Estudiante
                                                                                             </option>
                                                                                             <option value="Profesor">
                                                                                                 Profesor
@@ -442,7 +469,8 @@
                                                                                             id="inputDiabetes"
                                                                                             class="form-control"
                                                                                             formControlName="diabetes">
-                                                                                            <option value="0">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...</option>
                                                                                             <option value="Madre">
                                                                                                 Madre
@@ -475,63 +503,78 @@
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
                                                                                         <label
-                                                                                            for="inputHipertension">Hipertensión</label>                                                                                        
-                                                                                            <select #input id="inputHipertension" class="form-control" formControlName="hipertension">
-                                                                                                <option value="0">
-                                                                                                    Seleccione...</option>
-                                                                                                <option value="Madre">
-                                                                                                    Madre
-                                                                                                </option>
-                                                                                                <option value="Padre">
-                                                                                                    Padre
-                                                                                                </option>
-                                                                                                <option value="AmbosPadres">
-                                                                                                    Ambos padres
-                                                                                                </option>
-                                                                                                <option value="AbuelaMaterna">
-                                                                                                    Abuela Materna
-                                                                                                </option>
-                                                                                                <option value="AbuelaPaterna">
-                                                                                                    Abuela Paterna
-                                                                                                </option>
-                                                                                                <option value="AbueloMaterno">
-                                                                                                    Abuelo Materno
-                                                                                                </option>
-                                                                                                <option value="AbueloPaterno">
-                                                                                                    Abuelo Paterno
-                                                                                                </option>
-                                                                                            </select>
+                                                                                            for="inputHipertension">Hipertensión</label>
+                                                                                        <select #input
+                                                                                            id="inputHipertension"
+                                                                                            class="form-control"
+                                                                                            formControlName="hipertensionFamiliar">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
+                                                                                                Seleccione...</option>
+                                                                                            <option value="Madre"> Madre
+                                                                                            </option>
+                                                                                            <option value="Padre">
+                                                                                                Padre
+                                                                                            </option>
+                                                                                            <option value="AmbosPadres">
+                                                                                                Ambos padres
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbuelaMaterna">
+                                                                                                Abuela Materna
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbuelaPaterna">
+                                                                                                Abuela Paterna
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbueloMaterno">
+                                                                                                Abuelo Materno
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbueloPaterno">
+                                                                                                Abuelo Paterno
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
                                                                                         <label
-                                                                                            for="inputTrombosis">Trombosis</label>                                                                                        
-                                                                                            <select #input id="inputTrombosis" class="form-control" formControlName="trombosis">
-                                                                                                <option value="0">
-                                                                                                    Seleccione...</option>
-                                                                                                <option value="Madre">
-                                                                                                    Madre
-                                                                                                </option>
-                                                                                                <option value="Padre">
-                                                                                                    Padre
-                                                                                                </option>
-                                                                                                <option value="AmbosPadres">
-                                                                                                    Ambos padres
-                                                                                                </option>
-                                                                                                <option value="AbuelaMaterna">
-                                                                                                    Abuela Materna
-                                                                                                </option>
-                                                                                                <option value="AbuelaPaterna">
-                                                                                                    Abuela Paterna
-                                                                                                </option>
-                                                                                                <option value="AbueloMaterno">
-                                                                                                    Abuelo Materno
-                                                                                                </option>
-                                                                                                <option value="AbueloPaterno">
-                                                                                                    Abuelo Paterno
-                                                                                                </option>
-                                                                                            </select>
+                                                                                            for="inputTrombosis">Trombosis</label>
+                                                                                        <select #input
+                                                                                            id="inputTrombosis"
+                                                                                            class="form-control"
+                                                                                            formControlName="trombosis">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
+                                                                                                Seleccione...</option>
+                                                                                            <option value="Madre">
+                                                                                                Madre
+                                                                                            </option>
+                                                                                            <option value="Padre">
+                                                                                                Padre
+                                                                                            </option>
+                                                                                            <option value="AmbosPadres">
+                                                                                                Ambos padres
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbuelaMaterna">
+                                                                                                Abuela Materna
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbuelaPaterna">
+                                                                                                Abuela Paterna
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbueloMaterno">
+                                                                                                Abuelo Materno
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbueloPaterno">
+                                                                                                Abuelo Paterno
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -539,32 +582,40 @@
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
                                                                                         <label
-                                                                                            for="inputCardiopatias">Cardiopatías</label>                                                                                        
-                                                                                            <select #input id="inputCardiopatias" class="form-control" formControlName="cardiopatias">
-                                                                                                <option value="0">
-                                                                                                    Seleccione...</option>
-                                                                                                <option value="Madre">
-                                                                                                    Madre
-                                                                                                </option>
-                                                                                                <option value="Padre">
-                                                                                                    Padre
-                                                                                                </option>
-                                                                                                <option value="AmbosPadres">
-                                                                                                    Ambos padres
-                                                                                                </option>
-                                                                                                <option value="AbuelaMaterna">
-                                                                                                    Abuela Materna
-                                                                                                </option>
-                                                                                                <option value="AbuelaPaterna">
-                                                                                                    Abuela Paterna
-                                                                                                </option>
-                                                                                                <option value="AbueloMaterno">
-                                                                                                    Abuelo Materno
-                                                                                                </option>
-                                                                                                <option value="AbueloPaterno">
-                                                                                                    Abuelo Paterno
-                                                                                                </option>
-                                                                                            </select>
+                                                                                            for="inputCardiopatias">Cardiopatías</label>
+                                                                                        <select #input
+                                                                                            id="inputCardiopatias"
+                                                                                            class="form-control"
+                                                                                            formControlName="cardiopatiaFamiliar">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
+                                                                                                Seleccione...</option>
+                                                                                            <option value="Madre">
+                                                                                                Madre
+                                                                                            </option>
+                                                                                            <option value="Padre">
+                                                                                                Padre
+                                                                                            </option>
+                                                                                            <option value="AmbosPadres">
+                                                                                                Ambos padres
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbuelaMaterna">
+                                                                                                Abuela Materna
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbuelaPaterna">
+                                                                                                Abuela Paterna
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbueloMaterno">
+                                                                                                Abuelo Materno
+                                                                                            </option>
+                                                                                            <option
+                                                                                                value="AbueloPaterno">
+                                                                                                Abuelo Paterno
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-4 col-sm-12">
@@ -581,32 +632,11 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputEg">Enfermedades
-                                                                                            genéticas</label>                                                                                       
-                                                                                            <select #input id="inputEg" class="form-control" formControlName="enfermedadesGeneticas">
-                                                                                                <option value="0">
-                                                                                                    Seleccione...</option>
-                                                                                                <option value="Madre">
-                                                                                                    Madre
-                                                                                                </option>
-                                                                                                <option value="Padre">
-                                                                                                    Padre
-                                                                                                </option>
-                                                                                                <option value="AmbosPadres">
-                                                                                                    Ambos padres
-                                                                                                </option>
-                                                                                                <option value="AbuelaMaterna">
-                                                                                                    Abuela Materna
-                                                                                                </option>
-                                                                                                <option value="AbuelaPaterna">
-                                                                                                    Abuela Paterna
-                                                                                                </option>
-                                                                                                <option value="AbueloMaterno">
-                                                                                                    Abuelo Materno
-                                                                                                </option>
-                                                                                                <option value="AbueloPaterno">
-                                                                                                    Abuelo Paterno
-                                                                                                </option>
-                                                                                            </select>
+                                                                                            genéticas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputEg"
+                                                                                            formControlName="enfermedadesGeneticas"
+                                                                                            class="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -666,7 +696,8 @@
                                                                                             id="inputAlcoholismo"
                                                                                             class="form-control"
                                                                                             formControlName="alcoholismo">
-                                                                                            <option value="">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...
                                                                                             </option>
                                                                                             <option value="Si">Sí
@@ -687,7 +718,8 @@
                                                                                             id="inputTabaquismo"
                                                                                             class="form-control"
                                                                                             formControlName="tabaquismo">
-                                                                                            <option value="">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...
                                                                                             </option>
                                                                                             <option value="Si">Sí
@@ -711,7 +743,8 @@
                                                                                             id="inputTabaquismoPasivo"
                                                                                             class="form-control"
                                                                                             formControlName="tabaquismoPasivo">
-                                                                                            <option value="">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...
                                                                                             </option>
                                                                                             <option value="Si">Sí
@@ -754,8 +787,22 @@
                                                                                 </button>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="card-body">
+                                                                        <!-- <div class="card-body">
                                                                             <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="inputPropiasDeLaInfancia">Enfermedades
+                                                                                            Propias de la
+                                                                                            Infancia</label>
+                                                                                        <input #input type="text" id="inputPropiasDeLaInfancia" formControlName="propiasDeLaInfancia"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+
+
+
+                                                                                
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
                                                                                         <label
@@ -766,7 +813,7 @@
                                                                                             class="form-control"
                                                                                             formControlName="grupoSanguineo">
                                                                                             <option
-                                                                                                value="No especificado">
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...
                                                                                             </option>
                                                                                             <option value="A+">A+
@@ -789,18 +836,7 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-md-4 col-sm-12">
-                                                                                    <div class="form-group">
-                                                                                        <label
-                                                                                            for="inputPropiasDeLaInfancia">Enfermedades
-                                                                                            Propias de la
-                                                                                            Infancia</label>
-                                                                                        <input #input type="text"
-                                                                                            id="inputPropiasDeLaInfancia"
-                                                                                            formControlName="propiasDeLaInfancia"
-                                                                                            class="form-control" />
-                                                                                    </div>
-                                                                                </div>
+                                                                              
 
 
                                                                                 <div class="col-md-4 col-sm-12">
@@ -877,7 +913,7 @@
                                                                                             class="form-control"
                                                                                             formControlName="hiv">
                                                                                             <option
-                                                                                                value="No especificado">
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...
                                                                                             </option>
                                                                                             <option value="Sí">Sí
@@ -897,7 +933,7 @@
                                                                                             class="form-control"
                                                                                             formControlName="sifilis">
                                                                                             <option
-                                                                                                value="No especificado">
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...
                                                                                             </option>
                                                                                             <option value="Sí">Sí
@@ -915,7 +951,7 @@
                                                                                             class="form-control"
                                                                                             formControlName="micosis">
                                                                                             <option
-                                                                                                value="No especificado">
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...
                                                                                             </option>
                                                                                             <option value="Sí">Sí
@@ -935,7 +971,7 @@
                                                                                             class="form-control"
                                                                                             formControlName="eip">
                                                                                             <option
-                                                                                                value="No especificado">
+                                                                                                value="NoEspecificado">
                                                                                                 Seleccione...
                                                                                             </option>
                                                                                             <option value="Sí">Sí
@@ -1109,7 +1145,382 @@
                                                                                 </div>
                                                                             </div>
 
+                                                                        </div> -->
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputPropiasDeLaInfancia">Enfermedades
+                                                                                            Propias de la
+                                                                                            Infancia</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputPropiasDeLaInfancia"
+                                                                                            formControlName="propiasDeLaInfancia"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputRubeola">Rubéola</label>
+                                                                                        <select #input id="inputRubeola"
+                                                                                            class="form-control"
+                                                                                            formControlName="rubeola">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputAmigdalitis">Amigdalitis</label>
+                                                                                        <select #input
+                                                                                            id="inputAmigdalitis"
+                                                                                            class="form-control"
+                                                                                            formControlName="amigdalitis">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputBronquitis">Bronquitis</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputBronquitis"
+                                                                                            formControlName="bronquitis"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputBronconeumonia">Bronconeumonía</label>
+                                                                                            <select #input id="inputBronconeumonia" class="form-control" formControlName="bronconeumonia">
+                                                                                                <option value="Sí">Sí
+                                                                                                </option>
+                                                                                                <option value="No">No
+                                                                                                </option>
+                                                                                            </select>                                                                                        
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHepatitisViralTipo">Hepatitis
+                                                                                            Viral</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputHepatitisViralTipo"
+                                                                                            formControlName="hepatitisViralTipo"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputParasitosis">Parasitosis</label>
+                                                                                            <select #input id="inputParasitosis" class="form-control" formControlName="parasitosis">
+                                                                                                <option value="Sí">Sí
+                                                                                                </option>
+                                                                                                <option value="No">No
+                                                                                                </option>
+                                                                                            </select>                                                                                        
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputToxoplasmosis">Toxoplasmosis</label>
+                                                                                            <select #input id="inputToxoplasmosis" class="form-control" formControlName="toxoplasmosis">
+                                                                                                <option value="Sí">Sí
+                                                                                                </option>
+                                                                                                <option value="No">No
+                                                                                                </option>
+                                                                                            </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputCitomegalovirus">Citomegalovirus</label>
+                                                                                            <select #input id="inputCitomegalovirus" class="form-control" formControlName="citomegalovirus">
+                                                                                                <option value="Sí">Sí
+                                                                                                </option>
+                                                                                                <option value="No">No
+                                                                                                </option>
+                                                                                            </select>                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHerpes">Herpes</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputHerpes"
+                                                                                            formControlName="herpes"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputClamydiasis">Clamydiasis</label>
+                                                                                            <select #input id="inputClamydiasis" class="form-control" formControlName="clamydiasis">
+                                                                                                <option value="Sí">Sí
+                                                                                                </option>
+                                                                                                <option value="No">No
+                                                                                                </option>
+                                                                                            </select>                                                                                        
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHIV">HIV</label>
+                                                                                        <select #input id="inputHIV"
+                                                                                            class="form-control"
+                                                                                            formControlName="hiv">                                                                                           
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputSifilis">Sífilis</label>
+                                                                                        <select #input id="inputSifilis"
+                                                                                            class="form-control"
+                                                                                            formControlName="sifilis">                                                                                            
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputMicosis">Micosis</label>
+                                                                                        <select #input id="inputMicosis"
+                                                                                            class="form-control"
+                                                                                            formControlName="micosis">                                                                                            
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="inputEIP">EIP
+                                                                                            (Enfermedad Inflamatoria
+                                                                                            Pélvica)</label>
+                                                                                        <select #input id="inputEIP"
+                                                                                            class="form-control"
+                                                                                            formControlName="eip">                                                                                          
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHipertension">Hipertensión</label>
+                                                                                            <select #input id="inputHipertension" class="form-control" formControlName="hipertension">
+                                                                                                <option value="Sí">Sí
+                                                                                                </option>
+                                                                                                <option value="No">No
+                                                                                                </option>
+                                                                                            </select>                                                                                        
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDiabetesMellitus">Diabetes
+                                                                                            Mellitus</label>
+                                                                                            <select #input id="inputDiabetesMellitus" class="form-control" formControlName="diabetesMellitus">
+                                                                                                <option value="Sí">Sí
+                                                                                                </option>
+                                                                                                <option value="No">No
+                                                                                                </option>
+                                                                                            </select>                                                                                       
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputOtrasEndocrinas">Otras
+                                                                                            Endocrinas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputOtrasEndocrinas"
+                                                                                            formControlName="otrasEndocrinas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- Nuevo select agregado después de "Otras Endocrinas", junto con los demás elementos -->
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputCardiopatias">Cardiopatías</label>
+                                                                                        <select #input
+                                                                                            id="inputCardiopatias"
+                                                                                            class="form-control"
+                                                                                            formControlName="cardiopatias">
+                                                                                            <option
+                                                                                                value="NoEspecificado">
+                                                                                                Seleccione...</option>
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputNefropatias">Nefropatías</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputNefropatias"
+                                                                                            formControlName="nefropatias"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDigestivas">Digestivas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDigestivas"
+                                                                                            formControlName="digestivas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputNeurologicas">Neurológicas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputNeurologicas"
+                                                                                            formControlName="neurologicas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputHematologicas">Hematológicas</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputHematologicas"
+                                                                                            formControlName="hematologicas"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputTumores">Tumores</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputTumores"
+                                                                                            formControlName="tumores"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputCondilomatosis">Condilomatosis</label>
+                                                                                            <select #input id="inputCondilomatosis" class="form-control" formControlName="condilomatosis">
+                                                                                                <option value="Sí">Sí
+                                                                                                </option>
+                                                                                                <option value="No">No
+                                                                                                </option>
+                                                                                            </select>                                                                                       
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputDisplasias">Displasias</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDisplasias"
+                                                                                            formControlName="displasias"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="inputAlergia">Alergia</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputAlergia"
+                                                                                            formControlName="alergia"
+                                                                                            class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
+
+
+
                                                                     </div>
                                                                 </div>
 

@@ -1,5 +1,5 @@
 export interface Paciente {
-  id:number;
+  id: number;
   clave: number;
   fechaDeNacimiento: string;
   sexo: string;
@@ -54,4 +54,6 @@ export interface Paciente {
   nombre: string;
   fechaConsulta: string;
   fechaUltimaConsulta: string;
+  hipertensionFamiliar: string;
+  cardiopatiaFamiliar: string;
 }

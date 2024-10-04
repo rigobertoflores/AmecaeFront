@@ -41,7 +41,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
   dia: any = this.fechaActual.getDate();
   mes: any = this.fechaActual.getMonth() + 1; // Los meses empiezan en 0
   año: number = this.fechaActual.getFullYear();
-  public mostrarBotonEliminar: boolean = false; // Cambia este valor para mostrar o no el botón
+  public mostrarBotonEliminar: boolean = false; // Cambia este valor para mostrar o no el botón  
 
   ajustarAltura(elemento: HTMLTextAreaElement): void {
     elemento.style.height = 'auto'; // Resetea la altura para calcular correctamente
@@ -54,6 +54,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
     this.cargarListaHistoria();
     this.cargarFormulario(this.his);
     this.formatearfecha();
+    this.mostrarBotonEliminar = false;
   }
   formatearfecha() {
     this.fechaFormateada = `${this.dia < 10 ? '0' + this.dia : this.dia}/${
@@ -62,7 +63,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
   }
   guardarEditarHistoria() {
     this.showLoading = true;
-    if (!this.historiaform.invalid) {
+    if (!this.historiaform.invalid) {     
       const historia: Historia = {
         id: this.historiaform.get('id')?.value || 0,
         hc: this.historiaform?.get('hc')?.value,
@@ -77,6 +78,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
           this.historiaform.get('id')?.setValue(0); // ID de la historia
           this.historiaform.get('nombre')?.setValue(''); // No
           this.historiaSeleccionada = 0;
+          this.mostrarBotonEliminar = false;
           this.showLoading = false;
           Swal.fire({
             position: 'center',
@@ -91,7 +93,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'info',
-        title: 'Debe agregar datos para poder guardar',
+        title: 'Debe rellenar todos los campos para poder guardar',
         showConfirmButton: false,
         timer: 2000,
       });
@@ -101,7 +103,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
 
   cargarFormulario(his: Historia) {
     this.historiaform = new FormGroup({
-      hc: new FormControl(),
+      hc: new FormControl('', Validators.required),
       id: new FormControl(),
       nombre: new FormControl('', Validators.required),
     });
@@ -120,13 +122,13 @@ export class HistoriaConfiguracionComponent implements OnInit {
       this.historiaform.get('hc')?.setValue(''); // Contenido de la historia
       this.historiaform.get('id')?.setValue(0); // ID de la historia
       this.historiaform.get('nombre')?.setValue(''); // No
-        this.mostrarBotonEliminar = false;
+      this.mostrarBotonEliminar = false;
     } else {
       const histo = this.historias.find(
         (historia) => historia.id == this.historiaSeleccionada
       );
       if (histo != null) {
-       this.mostrarBotonEliminar= true; // Cambia este valor para mostrar o no el botón
+        this.mostrarBotonEliminar = true; // Cambia este valor para mostrar o no el botón
 
         this.historiaform.get('hc')?.setValue(histo.hc); // Contenido de la historia
         this.historiaform.get('id')?.setValue(histo.id); // ID de la historia
@@ -209,45 +211,59 @@ export class HistoriaConfiguracionComponent implements OnInit {
   }
 
   eliminarHistoria() {
-    if (this.historiaSeleccionada != 0) { 
-      this.showLoading = true;
-      if (!this.historiaform.invalid) {
-        const historia: Historia = {
-          id: this.historiaform.get('id')?.value || 0,
-          hc: this.historiaform?.get('hc')?.value,
-          nombre: this.historiaform.get('nombre')?.value,
-        };
-        this.Service.postData('DeleteHistoria', historia).subscribe(
-          (result: Historia[]) => {
-            this.data = '';
-            this.listahistorias = result;
-            this.historias = result;
-            this.historiaform.get('hc')?.setValue(''); // Contenido de la historia
-            this.historiaform.get('id')?.setValue(0); // ID de la historia
-            this.historiaform.get('nombre')?.setValue(''); // No
-            this.historiaSeleccionada = 0;
-            this.showLoading = false;
+    if (this.historiaSeleccionada != 0) {
+      Swal.fire({
+        title: '¿Seguro desea eliminar esta historia?',
+        text: 'Se eliminará la historia',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.showLoading = true;
+          if (!this.historiaform.invalid) {
+            const historia: Historia = {
+              id: this.historiaform.get('id')?.value || 0,
+              hc: this.historiaform?.get('hc')?.value,
+              nombre: this.historiaform.get('nombre')?.value,
+            };
+
+            this.Service.postData('DeleteHistoria', historia).subscribe(
+              (result: Historia[]) => {
+                this.data = '';
+                this.listahistorias = result;
+                this.historias = result;
+                this.historiaform.get('hc')?.setValue(''); // Contenido de la historia
+                this.historiaform.get('id')?.setValue(0); // ID de la historia
+                this.historiaform.get('nombre')?.setValue(''); // Nombre
+                this.historiaSeleccionada = 0;
+                 this.mostrarBotonEliminar = false;
+                this.showLoading = false;
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Se ha eliminado la historia correctamente',
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+              }
+            );
+          } else {
             Swal.fire({
               position: 'center',
-              icon: 'success',
-              title: 'Se ha eliminado la historia correctamente',
+              icon: 'info',
+              title: 'El formulario no es válido',
               showConfirmButton: false,
               timer: 2000,
             });
+            this.showLoading = false;
           }
-        );
-      } else {
-        Swal.fire({
-          position: 'center',
-          icon: 'info',
-          title: 'El formulario no es vàlido',
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        this.showLoading = false;
-      }
+        }
+      });
     }
-
   }
 }
 

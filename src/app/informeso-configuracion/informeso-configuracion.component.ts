@@ -54,6 +54,7 @@ export class InformesoConfiguracionComponent implements OnInit {
     this.cargarListaInformeform();
     this.cargarFormulario(this.his);
     this.formatearfecha();
+    this.mostrarBotonEliminar = false;
   }
 
   formatearfecha() {
@@ -77,6 +78,7 @@ export class InformesoConfiguracionComponent implements OnInit {
           this.informeform.get('id')?.setValue(0); // ID de la historia
           this.informeform.get('nombre')?.setValue(''); // No
           this.informeeleccionada = 0;
+          this.mostrarBotonEliminar = false;
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -90,7 +92,7 @@ export class InformesoConfiguracionComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'info',
-        title: 'Debe agregar datos para poder guardar',
+        title: 'Debe rellenar todos los campos para poder guardar',
         showConfirmButton: false,
         timer: 2000,
       });
@@ -99,7 +101,7 @@ export class InformesoConfiguracionComponent implements OnInit {
 
   cargarFormulario(his: informeoperatorio) {
     this.informeform = new FormGroup({
-      informe: new FormControl(),
+      informe: new FormControl('', Validators.required),
       id: new FormControl(),
       nombre: new FormControl('', Validators.required),
     });
@@ -145,34 +147,49 @@ export class InformesoConfiguracionComponent implements OnInit {
 
   eliminarInforme() {
     if (!this.informeform.invalid) {
-      const infor: informeoperatorio = {
-        id: this.informeform.get('id')?.value || 0,
-        informe: this.informeform?.get('informe')?.value,
-        nombre: this.informeform.get('nombre')?.value,
-      };
-      this.Service.postData('DeleteInforme', infor).subscribe(
-        (result: informeoperatorio[]) => {
-          this.data = '';
-          this.listainforme = result;
-          this.informe = result;
-          this.informeform.get('informe')?.setValue(''); // Contenido de la historia
-          this.informeform.get('id')?.setValue(0); // ID de la historia
-          this.informeform.get('nombre')?.setValue(''); // No
-          this.informeeleccionada = 0;
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Se ha eliminado correctamente el informe',
-            showConfirmButton: false,
-            timer: 2000,
-          });
+      Swal.fire({
+        title: '¿Está seguro de que desea eliminar este informe?',
+        text: 'Esta acción no se puede deshacer. Se eliminará el informe.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const infor: informeoperatorio = {
+            id: this.informeform.get('id')?.value || 0,
+            informe: this.informeform?.get('informe')?.value,
+            nombre: this.informeform.get('nombre')?.value,
+          };
+
+          this.Service.postData('DeleteInforme', infor).subscribe(
+            (result: informeoperatorio[]) => {
+              this.data = '';
+              this.listainforme = result;
+              this.informe = result;
+              this.informeform.get('informe')?.setValue(''); // Limpiar el contenido del informe
+              this.informeform.get('id')?.setValue(0); // Limpiar el ID
+              this.informeform.get('nombre')?.setValue(''); // Limpiar el nombre
+              this.informeeleccionada = 0;
+              this.mostrarBotonEliminar = false;
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'El informe se ha eliminado correctamente',
+                showConfirmButton: false,
+                timer: 2000,
+              });
+            }
+          );
         }
-      );
+      });
     } else {
       Swal.fire({
         position: 'center',
         icon: 'info',
-        title: 'El formulario no es vàlido',
+        title: 'No se puede eliminar! El formulario no es válido',
         showConfirmButton: false,
         timer: 2000,
       });
