@@ -18,6 +18,7 @@ import { ImagenPaciente } from '../interface/ImagenPaciente';
 import { UserService } from '../Services/user.service';
 import { LoadingComponent } from '../loading/loading.component';
 import { DatePipe } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inicio',
@@ -107,40 +108,53 @@ export class InicioComponent implements OnInit, AfterViewInit {
       pageIndex,
       pageSize,
       this.filter
-    ).subscribe((data) => {
-      if (data.items[0]) {
-        this.nombre = data.items[0].nombre;
+    ).subscribe(
+      (data) => {
+        if (data.items[0]) {
+          this.nombre = data.items[0].nombre;
 
-        if (data.items[0].fechaDeNacimiento != undefined) {
-          const fechaNacimientoDate = new Date(data.items[0].fechaDeNacimiento);
-          const hoy = new Date();
+          if (data.items[0].fechaDeNacimiento != undefined) {
+            const fechaNacimientoDate = new Date(
+              data.items[0].fechaDeNacimiento
+            );
+            const hoy = new Date();
 
-          let edad = hoy.getFullYear() - fechaNacimientoDate.getFullYear();
+            let edad = hoy.getFullYear() - fechaNacimientoDate.getFullYear();
 
-          // Ajustar la edad si el cumpleaños aún no ha ocurrido este año
-          const haCumplidoAnios =
-            hoy.getMonth() > fechaNacimientoDate.getMonth() ||
-            (hoy.getMonth() === fechaNacimientoDate.getMonth() &&
-              hoy.getDate() >= fechaNacimientoDate.getDate());
+            // Ajustar la edad si el cumpleaños aún no ha ocurrido este año
+            const haCumplidoAnios =
+              hoy.getMonth() > fechaNacimientoDate.getMonth() ||
+              (hoy.getMonth() === fechaNacimientoDate.getMonth() &&
+                hoy.getDate() >= fechaNacimientoDate.getDate());
 
-          if (!haCumplidoAnios) {
-            edad--;
+            if (!haCumplidoAnios) {
+              edad--;
+            }
+
+            this.edad = edad;
           }
-
-          this.edad = edad;
+          let fechaUC = this.formatDate(data.items[0].fechaUltimaConsulta);
+          this.fecha_ultimaconsulta = fechaUC != null ? fechaUC : '';
+          this.telefono = data.items[0].telefono;
+          this.email = data.items[0].email;
+          this.clave = data.items[0].clave;
+          this.cargarFotoPaciente(this.clave);
         }
-        let fechaUC = this.formatDate(data.items[0].fechaUltimaConsulta);
-        this.fecha_ultimaconsulta = fechaUC != null ? fechaUC : '';
-        this.telefono = data.items[0].telefono;
-        this.email = data.items[0].email;
-        this.clave = data.items[0].clave;
-        this.cargarFotoPaciente(this.clave);
+        this.dataSource = new MatTableDataSource<Paciente>(data.items);
+        this.paginator.length = data.totalCount;
+        this.dataSource.sort = this.sort;
+        this.showLoading = false;
+      },
+      (error) => {
+        this.showLoading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Ocurrió un error al cargar los pacientes',          
+        });
+        console.error('Error al cargar los pacientes:', error);
       }
-      this.dataSource = new MatTableDataSource<Paciente>(data.items);
-      this.paginator.length = data.totalCount;
-      this.dataSource.sort = this.sort;
-      this.showLoading = false;
-    });
+    );
   }
 
   formatearfecha() {
@@ -148,8 +162,6 @@ export class InicioComponent implements OnInit, AfterViewInit {
       this.mes < 10 ? '0' + this.mes : this.mes
     }/${this.año}`;
   }
-
-  
 
   cargarListadodePacientes() {
     this.Service.getList('GetPacientes').subscribe((data: Paciente[]) => {
