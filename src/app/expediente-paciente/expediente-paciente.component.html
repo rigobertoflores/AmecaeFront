@@ -1647,11 +1647,28 @@
                                         <app-complementarios></app-complementarios>
                                     </div>
                                     <div class="tab-pane" id="imprimirExpCompleto">
+                                        <div class="alert alert-info" role="alert">
+                                            <h4 class="alert-heading">Imprimir Expediente Completo</h4>
+                                            <p>Estás a punto de imprimir el expediente completo del paciente. Las secciones que se van a imprimir
+                                                incluyen:</p>
+                                            <ul>
+                                                <li>Información General</li>
+                                                <li>Historia</li>
+                                                <li>Recetas</li>
+                                                <li>Complementarios</li>
+                                                <li>Justificaciones e Informes</li>
+                                            </ul>
+                                            <hr>
+                                            <p class="mb-0">Por favor, revisa el contenido antes de proceder a la impresión.</p>
+                                        </div>
+                                    
                                         <div>
-                                            <button (click)="printPage()" type="button"
-                                                class="btn btn-success btn-block">Imprimir</button>
+                                            <button (click)="printPage()" type="button" class="btn btn-success btn-block">
+                                                Imprimir Expediente Completo
+                                            </button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

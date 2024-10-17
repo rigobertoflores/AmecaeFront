@@ -29,6 +29,7 @@ export enum UrlsPlantillas {
 export enum UrlsPacientes {
   GetPacientesNotificaciones = 'GetPacientesNotificacionesCitas',
   GetCitasPorFecha = 'GetCitasPorFecha',
+  PrintCompleteFile = 'PrintCompleteFile',
 }
 
 export enum UrlsAuth {

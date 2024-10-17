@@ -99,6 +99,7 @@ export class ExpedientePacienteComponent implements OnInit {
   minDate: string;
   @ViewChildren('input') inputs!: QueryList<ElementRef>; // Asume que todos los campos de entrada tienen la referencia #input
   imprimirExpCompleto: boolean = false;
+  url: Blob;
 
   constructor(
     private route: ActivatedRoute,
@@ -318,14 +319,18 @@ export class ExpedientePacienteComponent implements OnInit {
       sifilis: new FormControl(data.sifilis == '' ? 'No' : data.sifilis),
       micosis: new FormControl(data.micosis == '' ? 'No' : data.micosis),
       eip: new FormControl(data.eip == '' ? 'No' : data.eip),
-      diabetesMellitus: new FormControl(data.diabetesMellitus == '' ? 'No' : data.diabetesMellitus),
+      diabetesMellitus: new FormControl(
+        data.diabetesMellitus == '' ? 'No' : data.diabetesMellitus
+      ),
       otrasEndocrinas: new FormControl(data.otrasEndocrinas),
       nefropatias: new FormControl(data.nefropatias),
       digestivas: new FormControl(data.digestivas),
       neurologicas: new FormControl(data.neurologicas),
       hematologicas: new FormControl(data.hematologicas),
       tumores: new FormControl(data.tumores),
-      condilomatosis: new FormControl(data.condilomatosis == '' ? 'No' : data.condilomatosis),
+      condilomatosis: new FormControl(
+        data.condilomatosis == '' ? 'No' : data.condilomatosis
+      ),
       displasias: new FormControl(data.displasias),
       alergia: new FormControl(data.alergia),
       fechaConsulta: new FormControl(
@@ -832,114 +837,159 @@ export class ExpedientePacienteComponent implements OnInit {
   // }
 
   printPage() {
-    // Obtener todos los tab-pane
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    const collapsibles = document.querySelectorAll('.collapsed-card');
-    const textareas = document.querySelectorAll('textarea');
-    const originalDisplayValues: string[] = [];
-    // Seleccionar todos los botones y selects
-    const buttons = document.querySelectorAll('button');
-    const selects = document.querySelectorAll('select');
-    const containers = document.querySelectorAll(
-      '.container-fluid, .row, .col-md-12, .card-body'
-    );
-
-    // Mostrar todos los tab-pane temporalmente
-    tabPanes.forEach((tabPane) => {
-      originalDisplayValues.push(
-        tabPane.classList.contains('active') ? 'active' : 'fade'
-      );
-      tabPane.classList.add('show', 'active');
-      tabPane.classList.remove('fade');
-    });
-
-    collapsibles.forEach((card) => {
-      card.classList.add('expand-card');
-      card.classList.remove('collapsed-card');
-    });
-    // Expandir todos los textarea según su contenido
-    textareas.forEach((textarea) => {
-      textarea.style.height = 'auto'; // Resetear la altura
-      textarea.style.height = textarea.scrollHeight + 'px'; // Ajustar la altura al contenido
-    });
-    // Seleccionar todos los botones y selects vacíos
-    const emptyButtons = document.querySelectorAll('button:empty');
-    const emptySelects = document.querySelectorAll('select');
-
-    const elementsToHide: HTMLElement[] = [];
-
-    // Ocultar botones vacíos
-    emptyButtons.forEach((button) => {
-      if (button.innerHTML.trim() === '') {
-        this.renderer.setStyle(button, 'display', 'none');
-        elementsToHide.push(button as HTMLElement);
-      }
-    });
-
-    // Ocultar selects vacíos o con opciones vacías
-    emptySelects.forEach((select) => {
-      const options = select.querySelectorAll('option');
-      let isEmpty = true;
-      options.forEach((option) => {
-        if (option.value.trim() !== '') {
-          isEmpty = false;
-        }
+    console.log('Se enviara peticion');
+    this.showLoading = true; // Inicia la carga
+    if (Number(this.parametro) > 0) {
+      console.log('id: ', this.parametro);
+      this.Service.GetData(
+        UrlsBackend.ApiPacientes,
+        `${UrlsPacientes.PrintCompleteFile}/${this.parametro?.toString()}`,
+        Number(this.parametro)
+      ).subscribe({
+        next: (pdfBlob: any) => {
+          if (pdfBlob.fileContents) {
+            // Decodificar el contenido del PDF desde base64
+            const binaryString = window.atob(pdfBlob.fileContents);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+              bytes[i] = binaryString.charCodeAt(i);
+            }
+            this.url = new Blob([bytes], { type: pdfBlob.contentType });
+            const url = window.URL.createObjectURL(this.url);
+            window.open(url, '_blank');
+          } else {
+            console.error('No data received or invalid blob');
+          }
+        },
+        error: (error) => {
+          // Se llama en caso de error en la operación
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ocurrió un error al imprimir los datos del pacientes',
+          });
+          console.error('Error al imprimir los datos del paciente:', error);
+          this.showLoading = false;
+          // Aquí podrías manejar el error, por ejemplo, mostrando un mensaje al usuario
+        },
+        complete: () => {
+          // Esto se ejecutará después de completar la suscripción, exitosa o no
+          this.showLoading = false; // Termina la carga
+        },
       });
-      if (isEmpty || options.length === 0) {
-        this.renderer.setStyle(select, 'display', 'none');
-        elementsToHide.push(select as HTMLElement);
-      }
-    });
-
-    // Ocultar todos los botones
-    buttons.forEach((button) => {
-      this.renderer.setStyle(button, 'display', 'none');
-      elementsToHide.push(button as HTMLElement);
-    });
-
-    // Ocultar todos los selectores
-    selects.forEach((select) => {
-      this.renderer.setStyle(select, 'display', 'none');
-      elementsToHide.push(select as HTMLElement);
-    });
-
-    containers.forEach((container) => {
-      const styles = getComputedStyle(container);
-      if (parseInt(styles.marginBottom) > 20) {
-        this.renderer.setStyle(container, 'margin-bottom', '20px'); // Limitar a 2 líneas
-      }
-      if (parseInt(styles.paddingBottom) > 20) {
-        this.renderer.setStyle(container, 'padding-bottom', '20px'); // Limitar a 2 líneas
-      }
-    });
-    // Ejecutar la impresión
-    window.print();
-
-    // Restaurar el estado original de los tab-pane
-    tabPanes.forEach((tabPane, index) => {
-      if (originalDisplayValues[index] === 'fade') {
-        tabPane.classList.remove('show', 'active');
-        tabPane.classList.add('fade');
-      } else {
-        tabPane.classList.remove('fade');
-        tabPane.classList.add('show', 'active');
-      }
-    });
-    collapsibles.forEach((card) => {
-      card.classList.add('collapsed-card');
-      card.classList.remove('expand-card');
-    });
-    textareas.forEach((textarea) => {
-      textarea.style.height = ''; // Restaurar a la altura original si es necesario
-    });
-    // Restaurar la visibilidad después de la impresión
-    elementsToHide.forEach((element) => {
-      this.renderer.removeStyle(element, 'display');
-    });
-
-    containers.forEach((container) => {
-      this.renderer.removeStyle(container, 'margin-bottom');
-      this.renderer.removeStyle(container, 'padding-bottom');
-    });
+    }
   }
+
+  // printPage() {
+  //   // Obtener todos los tab-pane
+  //   const tabPanes = document.querySelectorAll('.tab-pane');
+  //   const collapsibles = document.querySelectorAll('.collapsed-card');
+  //   const textareas = document.querySelectorAll('textarea');
+  //   const originalDisplayValues: string[] = [];
+  //   // Seleccionar todos los botones y selects
+  //   const buttons = document.querySelectorAll('button');
+  //   const selects = document.querySelectorAll('select');
+  //   const containers = document.querySelectorAll(
+  //     '.container-fluid, .row, .col-md-12, .card-body'
+  //   );
+
+  //   // Mostrar todos los tab-pane temporalmente
+  //   tabPanes.forEach((tabPane) => {
+  //     originalDisplayValues.push(
+  //       tabPane.classList.contains('active') ? 'active' : 'fade'
+  //     );
+  //     tabPane.classList.add('show', 'active');
+  //     tabPane.classList.remove('fade');
+  //   });
+
+  //   collapsibles.forEach((card) => {
+  //     card.classList.add('expand-card');
+  //     card.classList.remove('collapsed-card');
+  //   });
+  //   // Expandir todos los textarea según su contenido
+  //   textareas.forEach((textarea) => {
+  //     textarea.style.height = 'auto'; // Resetear la altura
+  //     textarea.style.height = textarea.scrollHeight + 'px'; // Ajustar la altura al contenido
+  //   });
+  //   // Seleccionar todos los botones y selects vacíos
+  //   const emptyButtons = document.querySelectorAll('button:empty');
+  //   const emptySelects = document.querySelectorAll('select');
+
+  //   const elementsToHide: HTMLElement[] = [];
+
+  //   // Ocultar botones vacíos
+  //   emptyButtons.forEach((button) => {
+  //     if (button.innerHTML.trim() === '') {
+  //       this.renderer.setStyle(button, 'display', 'none');
+  //       elementsToHide.push(button as HTMLElement);
+  //     }
+  //   });
+
+  //   // Ocultar selects vacíos o con opciones vacías
+  //   emptySelects.forEach((select) => {
+  //     const options = select.querySelectorAll('option');
+  //     let isEmpty = true;
+  //     options.forEach((option) => {
+  //       if (option.value.trim() !== '') {
+  //         isEmpty = false;
+  //       }
+  //     });
+  //     if (isEmpty || options.length === 0) {
+  //       this.renderer.setStyle(select, 'display', 'none');
+  //       elementsToHide.push(select as HTMLElement);
+  //     }
+  //   });
+
+  //   // Ocultar todos los botones
+  //   buttons.forEach((button) => {
+  //     this.renderer.setStyle(button, 'display', 'none');
+  //     elementsToHide.push(button as HTMLElement);
+  //   });
+
+  //   // Ocultar todos los selectores
+  //   selects.forEach((select) => {
+  //     this.renderer.setStyle(select, 'display', 'none');
+  //     elementsToHide.push(select as HTMLElement);
+  //   });
+
+  //   containers.forEach((container) => {
+  //     const styles = getComputedStyle(container);
+  //     if (parseInt(styles.marginBottom) > 20) {
+  //       this.renderer.setStyle(container, 'margin-bottom', '20px'); // Limitar a 2 líneas
+  //     }
+  //     if (parseInt(styles.paddingBottom) > 20) {
+  //       this.renderer.setStyle(container, 'padding-bottom', '20px'); // Limitar a 2 líneas
+  //     }
+  //   });
+  //   // Ejecutar la impresión
+  //   window.print();
+
+  //   // Restaurar el estado original de los tab-pane
+  //   tabPanes.forEach((tabPane, index) => {
+  //     if (originalDisplayValues[index] === 'fade') {
+  //       tabPane.classList.remove('show', 'active');
+  //       tabPane.classList.add('fade');
+  //     } else {
+  //       tabPane.classList.remove('fade');
+  //       tabPane.classList.add('show', 'active');
+  //     }
+  //   });
+  //   collapsibles.forEach((card) => {
+  //     card.classList.add('collapsed-card');
+  //     card.classList.remove('expand-card');
+  //   });
+  //   textareas.forEach((textarea) => {
+  //     textarea.style.height = ''; // Restaurar a la altura original si es necesario
+  //   });
+  //   // Restaurar la visibilidad después de la impresión
+  //   elementsToHide.forEach((element) => {
+  //     this.renderer.removeStyle(element, 'display');
+  //   });
+
+  //   containers.forEach((container) => {
+  //     this.renderer.removeStyle(container, 'margin-bottom');
+  //     this.renderer.removeStyle(container, 'padding-bottom');
+  //   });
+  // }
 }
