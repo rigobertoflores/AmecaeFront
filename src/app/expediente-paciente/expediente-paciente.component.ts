@@ -161,7 +161,7 @@ export class ExpedientePacienteComponent implements OnInit {
         propiasDeLaInfancia: '',
         rubeola: 'No',
         amigdalitis: 'No',
-        bronquitis: '',
+        bronquitis: 'No',
         bronconeumonia: 'No',
         hepatitisViralTipo: '',
         parasitosis: 'No',
@@ -303,10 +303,8 @@ export class ExpedientePacienteComponent implements OnInit {
       amigdalitis: new FormControl(
         data.amigdalitis == '' ? 'No' : data.amigdalitis
       ),
-      bronquitis: new FormControl(data.bronquitis),
-      bronconeumonia: new FormControl(
-        data.bronconeumonia == '' ? 'No' : data.bronconeumonia
-      ),
+      bronquitis: new FormControl(data.bronquitis == '' ? 'No' : data.bronquitis),
+      bronconeumonia: new FormControl(data.bronconeumonia == '' ? 'No' : data.bronconeumonia),
       hepatitisViralTipo: new FormControl(data.hepatitisViralTipo),
       parasitosis: new FormControl(
         data.parasitosis == '' ? 'No' : data.parasitosis
