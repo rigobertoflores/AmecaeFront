@@ -181,74 +181,117 @@ export class TesteditorHistoriaComponent implements OnInit, AfterViewInit {
       printWindow!!.close();
     }, 1000); // Espera 1 segundo para asegurarse de que todo se carga correctamente
   }
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    const textarea = document.getElementById(
-      'nombreinputtexthistoria'
-    ) as HTMLTextAreaElement;
-    if (!textarea) return;
+  // @HostListener('document:keydown', ['$event'])
+  // handleKeyboardEvent(event: KeyboardEvent) {
+  //   const textarea = document.getElementById(
+  //     'nombreinputtexthistoria'
+  //   ) as HTMLTextAreaElement;
+  //   if (!textarea) return;
 
-    const cursorPosition = textarea.selectionStart;
-    const lines = textarea.value.split('\n'); // Dividimos todo el texto en líneas
-    const currentLineIndex = lines.findIndex(
-      (line) =>
-        textarea.selectionStart <= textarea.value.indexOf(line) + line.length
-    ); // Obtener la línea actual
+  //   const cursorPosition = textarea.selectionStart;
+  //   const lines = textarea.value.split('\n'); // Dividimos todo el texto en líneas
+  //   const currentLineIndex = lines.findIndex(
+  //     (line) =>
+  //       textarea.selectionStart <= textarea.value.indexOf(line) + line.length
+  //   ); // Obtener la línea actual
 
-    // Obtener la posición del primer asterisco en la primera línea
-    const firstAsteriskPosition = lines[0].indexOf('*');
-    if (firstAsteriskPosition === -1) return; // Si no hay asterisco, no hacemos nada
+  //   // Obtener la posición del primer asterisco en la primera línea
+  //   const firstAsteriskPosition = lines[0].indexOf('*');
+  //   if (firstAsteriskPosition === -1) return; // Si no hay asterisco, no hacemos nada
 
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      this.moveCursorUp(textarea, currentLineIndex, firstAsteriskPosition);
-    } else if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      this.moveCursorDown(
-        textarea,
-        currentLineIndex,
-        lines.length,
-        firstAsteriskPosition
-      );
-    }
-  }
+  //   if (event.key === 'ArrowUp') {
+  //     event.preventDefault();
+  //     this.moveCursorUp(textarea, currentLineIndex, firstAsteriskPosition);
+  //   } else if (event.key === 'ArrowDown') {
+  //     event.preventDefault();
+  //     this.moveCursorDown(
+  //       textarea,
+  //       currentLineIndex,
+  //       lines.length,
+  //       firstAsteriskPosition
+  //     );
+  //   }
+  // }
 
-  private moveCursorUp(
-    textarea: HTMLTextAreaElement,
-    currentLineIndex: number,
-    asteriskPosition: number
-  ) {
-    if (currentLineIndex === 0) return; // Ya está en la primera línea
+  // private moveCursorUp(
+  //   textarea: HTMLTextAreaElement,
+  //   currentLineIndex: number,
+  //   asteriskPosition: number
+  // ) {
+  //   if (currentLineIndex === 0) return; // Ya está en la primera línea
 
-    const previousLineStart =
-      textarea.value.split('\n').slice(0, currentLineIndex).join('\n').length +
-      1; // Longitud de las líneas anteriores para ajustar la posición
+  //   const previousLineStart =
+  //     textarea.value.split('\n').slice(0, currentLineIndex).join('\n').length +
+  //     1; // Longitud de las líneas anteriores para ajustar la posición
 
-    // Posicionar el cursor justo después del asterisco en la línea anterior
-    textarea.setSelectionRange(
-      previousLineStart + asteriskPosition + 1,
-      previousLineStart + asteriskPosition + 1
-    );
-  }
+  //   // Posicionar el cursor justo después del asterisco en la línea anterior
+  //   textarea.setSelectionRange(
+  //     previousLineStart + asteriskPosition + 1,
+  //     previousLineStart + asteriskPosition + 1
+  //   );
+  // }
 
-  private moveCursorDown(
-    textarea: HTMLTextAreaElement,
-    currentLineIndex: number,
-    totalLines: number,
-    asteriskPosition: number
-  ) {
-    if (currentLineIndex >= totalLines - 1) return; // Ya está en la última línea
+  // private moveCursorDown(
+  //   textarea: HTMLTextAreaElement,
+  //   currentLineIndex: number,
+  //   totalLines: number,
+  //   asteriskPosition: number
+  // ) {
+  //   if (currentLineIndex >= totalLines - 1) return; // Ya está en la última línea
 
-    const nextLineStart =
-      textarea.value
-        .split('\n')
-        .slice(0, currentLineIndex + 1)
-        .join('\n').length + 1; // Longitud de las líneas anteriores para ajustar la posición
+  //   const nextLineStart =
+  //     textarea.value
+  //       .split('\n')
+  //       .slice(0, currentLineIndex + 1)
+  //       .join('\n').length + 1; // Longitud de las líneas anteriores para ajustar la posición
 
-    // Posicionar el cursor justo después del asterisco en la línea siguiente
-    textarea.setSelectionRange(
-      nextLineStart + asteriskPosition + 1,
-      nextLineStart + asteriskPosition + 1
-    );
-  }
+  //   // Posicionar el cursor justo después del asterisco en la línea siguiente
+  //   textarea.setSelectionRange(
+  //     nextLineStart + asteriskPosition + 1,
+  //     nextLineStart + asteriskPosition + 1
+  //   );
+  // }
+
+  // @HostListener('keydown', ['$event'])
+  // handleKeyboardEvent(event: KeyboardEvent) {
+  //   const textarea = document.getElementById(
+  //     'nombreinputtexthistoria'
+  //   ) as HTMLTextAreaElement;
+  //   if (!textarea) return;
+
+  //   if (event.key === 'ArrowUp') {
+  //     this.moveCursorLineUp(textarea);
+  //   } else if (event.key === 'ArrowDown') {
+  //     this.moveCursorLineDown(textarea);
+  //   }
+  // }
+
+  // private moveCursorLineUp(textarea: HTMLTextAreaElement) {
+  //   const cursorPos = textarea.selectionStart;
+  //   const lines = textarea.value.substr(0, cursorPos).split('\n');
+  //   if (lines.length > 1) {
+  //     const prevLineLength = lines[lines.length - 2].length;
+  //     const currentColumn = lines[lines.length - 1].length;
+  //     const newPos =
+  //       cursorPos - currentColumn - 1 - Math.min(prevLineLength, currentColumn);
+  //     textarea.setSelectionRange(newPos, newPos);
+  //   }
+  // }
+
+  // private moveCursorLineDown(textarea: HTMLTextAreaElement) {
+  //   const cursorPos = textarea.selectionStart;
+  //   const lines = textarea.value.substr(cursorPos).split('\n');
+
+  //   if (lines.length > 1) {
+  //     const currentColumn = lines[lines.length - 1].length;
+  //     const nextLineLength = lines[1].length;
+  //     const newPos = cursorPos + currentColumn;
+
+  //     // Posiciona el cursor al final de la siguiente línea si la longitud es menor
+  //     textarea.setSelectionRange(
+  //       Math.min(newPos, newPos - (currentColumn - nextLineLength)),
+  //       Math.min(newPos, newPos - (currentColumn - nextLineLength))
+  //     );
+  //   }
+  // }
 }

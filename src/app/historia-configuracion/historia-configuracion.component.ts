@@ -41,7 +41,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
   dia: any = this.fechaActual.getDate();
   mes: any = this.fechaActual.getMonth() + 1; // Los meses empiezan en 0
   año: number = this.fechaActual.getFullYear();
-  public mostrarBotonEliminar: boolean = false; // Cambia este valor para mostrar o no el botón  
+  public mostrarBotonEliminar: boolean = false; // Cambia este valor para mostrar o no el botón
 
   ajustarAltura(elemento: HTMLTextAreaElement): void {
     elemento.style.height = 'auto'; // Resetea la altura para calcular correctamente
@@ -63,7 +63,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
   }
   guardarEditarHistoria() {
     this.showLoading = true;
-    if (!this.historiaform.invalid) {     
+    if (!this.historiaform.invalid) {
       const historia: Historia = {
         id: this.historiaform.get('id')?.value || 0,
         hc: this.historiaform?.get('hc')?.value,
@@ -146,69 +146,135 @@ export class HistoriaConfiguracionComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    const textarea = document.getElementById(
-      'nombreinputtexthistoria'
-    ) as HTMLTextAreaElement;
-    if (!textarea) return;
+  // @HostListener('document:keydown', ['$event'])
+  // handleKeyboardEvent(event: KeyboardEvent) {
+  //   const textarea = document.getElementById(
+  //     'nombreinputtexthistoria'
+  //   ) as HTMLTextAreaElement;
+  //   if (!textarea) return;
 
-    const cursorPosition = textarea.selectionStart;
-    const lines = textarea.value.substr(0, cursorPosition).split('\n');
-    const currentLineIndex = lines.length - 1;
-    const currentLine = lines[currentLineIndex];
+  //   const cursorPosition = textarea.selectionStart;
+  //   const lines = textarea.value.substr(0, cursorPosition).split('\n');
+  //   const currentLineIndex = lines.length - 1;
+  //   const currentLine = lines[currentLineIndex];
 
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      this.moveCursorUp(textarea, currentLineIndex, cursorPosition, lines);
-    } else if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      this.moveCursorDown(
-        textarea,
-        currentLineIndex,
-        cursorPosition,
-        lines,
-        currentLine.length
-      );
-    }
-  }
+  //   if (event.key === 'ArrowUp') {
+  //     event.preventDefault();
+  //     this.moveCursorUp(textarea, currentLineIndex, cursorPosition, lines);
+  //   } else if (event.key === 'ArrowDown') {
+  //     event.preventDefault();
+  //     this.moveCursorDown(
+  //       textarea,
+  //       currentLineIndex,
+  //       cursorPosition,
+  //       lines,
+  //       currentLine.length
+  //     );
+  //   }
+  // }
 
-  private moveCursorUp(
-    textarea: HTMLTextAreaElement,
-    currentLineIndex: number,
-    cursorPosition: number,
-    lines: string[]
-  ) {
-    if (currentLineIndex === 0) return; // Ya está en la primera línea
+  // private moveCursorUp(
+  //   textarea: HTMLTextAreaElement,
+  //   currentLineIndex: number,
+  //   cursorPosition: number,
+  //   lines: string[]
+  // ) {
+  //   if (currentLineIndex === 0) return; // Ya está en la primera línea
 
-    const previousLineLength = lines[currentLineIndex - 1].length;
-    const newCursorPosition =
-      cursorPosition - lines[currentLineIndex].length - 1;
+  //   const previousLineLength = lines[currentLineIndex - 1].length;
+  //   const newCursorPosition =
+  //     cursorPosition - lines[currentLineIndex].length - 1;
 
-    // Asegurar que la nueva posición no sea negativa
-    const adjustedPosition = newCursorPosition >= 0 ? newCursorPosition : 0;
-    textarea.setSelectionRange(adjustedPosition, adjustedPosition);
-  }
+  //   // Asegurar que la nueva posición no sea negativa
+  //   const adjustedPosition = newCursorPosition >= 0 ? newCursorPosition : 0;
+  //   textarea.setSelectionRange(adjustedPosition, adjustedPosition);
+  // }
 
-  private moveCursorDown(
-    textarea: HTMLTextAreaElement,
-    currentLineIndex: number,
-    cursorPosition: number,
-    lines: string[],
-    currentLineLength: number
-  ) {
-    const nextLines = textarea.value.substr(cursorPosition).split('\n');
-    if (nextLines.length <= 1) return; // Ya está en la última línea
+  // private moveCursorDown(
+  //   textarea: HTMLTextAreaElement,
+  //   currentLineIndex: number,
+  //   cursorPosition: number,
+  //   lines: string[],
+  //   currentLineLength: number
+  // ) {
+  //   const nextLines = textarea.value.substr(cursorPosition).split('\n');
+  //   if (nextLines.length <= 1) return; // Ya está en la última línea
 
-    const newCursorPosition = cursorPosition + currentLineLength + 1;
+  //   const newCursorPosition = cursorPosition + currentLineLength + 1;
 
-    // Asegurar que la nueva posición no exceda la longitud del valor del textarea
-    const adjustedPosition =
-      newCursorPosition <= textarea.value.length
-        ? newCursorPosition
-        : textarea.value.length;
-    textarea.setSelectionRange(adjustedPosition, adjustedPosition);
-  }
+  //   // Asegurar que la nueva posición no exceda la longitud del valor del textarea
+  //   const adjustedPosition =
+  //     newCursorPosition <= textarea.value.length
+  //       ? newCursorPosition
+  //       : textarea.value.length;
+  //   textarea.setSelectionRange(adjustedPosition, adjustedPosition);
+  // }
+
+  // @HostListener('document:keydown', ['$event'])
+  // handleKeyboardEvent(event: KeyboardEvent) {
+  //   const textarea = document.getElementById(
+  //     'nombreinputtexthistoria'
+  //   ) as HTMLTextAreaElement;
+  //   if (!textarea) return;
+
+  //   const cursorPosition = textarea.selectionStart;
+  //   const lines = textarea.value.split('\n'); // Divide todo el texto en líneas
+  //   const currentLineIndex =
+  //     textarea.value.substr(0, cursorPosition).split('\n').length - 1;
+
+  //   if (event.key === 'ArrowUp') {
+  //     event.preventDefault();
+  //     this.moveCursorUp(textarea, currentLineIndex, cursorPosition, lines);
+  //   } else if (event.key === 'ArrowDown') {
+  //     event.preventDefault();
+  //     this.moveCursorDown(textarea, currentLineIndex, cursorPosition, lines);
+  //   }
+  // }
+
+  // private moveCursorUp(
+  //   textarea: HTMLTextAreaElement,
+  //   currentLineIndex: number,
+  //   cursorPosition: number,
+  //   lines: string[]
+  // ) {
+  //   if (currentLineIndex === 0) return; // Ya está en la primera línea
+
+  //   // Mover a la línea anterior
+  //   const previousLine = lines[currentLineIndex - 1];
+
+  //   // Buscar la posición del asterisco (*) en la línea anterior
+  //   const asteriskPosition = previousLine.indexOf('*');
+
+  //   // Calcular la nueva posición: justo después del asterisco o al final si no hay asterisco
+  //   const newCursorPosition =
+  //     lines.slice(0, currentLineIndex - 1).join('\n').length +
+  //     (asteriskPosition !== -1 ? asteriskPosition + 1 : previousLine.length) +
+  //     1;
+
+  //   textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+  // }
+
+  // private moveCursorDown(
+  //   textarea: HTMLTextAreaElement,
+  //   currentLineIndex: number,
+  //   cursorPosition: number,
+  //   lines: string[]
+  // ) {
+  //   if (currentLineIndex >= lines.length - 1) return; // Ya está en la última línea
+
+  //   // Mover a la línea siguiente
+  //   const nextLine = lines[currentLineIndex + 1];
+
+  //   // Buscar la posición del asterisco (*) en la línea siguiente
+  //   const asteriskPosition = nextLine.indexOf('*');
+
+  //   // Calcular la nueva posición: justo después del asterisco o al final si no hay asterisco
+  //   const newCursorPosition =
+  //     lines.slice(0, currentLineIndex + 1).join('\n').length +
+  //     (asteriskPosition !== -1 ? asteriskPosition + 1 : nextLine.length);
+
+  //   textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+  // }
 
   eliminarHistoria() {
     if (this.historiaSeleccionada != 0) {
@@ -240,7 +306,7 @@ export class HistoriaConfiguracionComponent implements OnInit {
                 this.historiaform.get('id')?.setValue(0); // ID de la historia
                 this.historiaform.get('nombre')?.setValue(''); // Nombre
                 this.historiaSeleccionada = 0;
-                 this.mostrarBotonEliminar = false;
+                this.mostrarBotonEliminar = false;
                 this.showLoading = false;
                 Swal.fire({
                   position: 'center',

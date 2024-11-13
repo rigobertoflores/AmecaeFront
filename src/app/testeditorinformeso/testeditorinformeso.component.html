@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12 colsm-12">
         <div class="card-body">
-            <div class="form-group">
+            <div class="form-group" >
                 <label for="historiaSelect">Selecciona una Informe Operatorio</label>
                 <select id="historiaSelect" class="form-control" [(ngModel)]="informeeleccionada"
                     [ngModelOptions]="{standalone: true}">
@@ -19,7 +19,7 @@
     <div class="col-md-12 colsm-12">
 
         <div class="card-body">
-            <div class="form-group">
+            <div class="form-group" data-allow-default="true">
                 <label for="nombreinput">Expediente</label>
                 <textarea class="texthistoria" id="nombreinputtexthistoria" [(ngModel)]="informeexpediente.informe"
                     class="form-control" (input)="ajustarAltura($event.target)" style="font-family: 'Courier New', monospace;"></textarea>

@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { AnimationItem } from 'lottie-web';
 import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 import { provideLottieOptions } from 'ngx-lottie';
+import { UserService } from '../Services/user.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,7 +32,6 @@ export const appConfig: ApplicationConfig = {
   templateUrl: './tratamientos.component.html',
   styleUrl: './tratamientos.component.css',
 })
-
 export class TratamientosComponent implements OnInit, AfterViewInit {
   tratamientosForm: any;
   mostrarTratamientosForm: any;
@@ -44,19 +44,24 @@ export class TratamientosComponent implements OnInit, AfterViewInit {
     path: '/assets/Loading.json',
   };
   Loading = true;
-  constructor(private Service: Service) {}
-  
+  user: any;
+  constructor(private Service: Service, private authService: UserService) {}
 
   ngOnInit(): void {
-    this.Loading=true;
+    if (this.authService.isAuthenticated()) {
+      const userJson = localStorage.getItem('user');
+      if (userJson) {
+        this.user = JSON.parse(userJson).email.split('@')[0];
+      }
+    }
+    this.Loading = true;
     this.cargarFormulario();
     this.getTreatments();
-    this.setupSearch(); 
+    this.setupSearch();
     console.log(this.getTreatments());
-   
   }
   ngAfterViewInit(): void {
-  //  this.Loading=false;
+    //  this.Loading=false;
   }
 
   cargarFormulario() {
@@ -92,6 +97,7 @@ export class TratamientosComponent implements OnInit, AfterViewInit {
       descripcionEnfermedad: this.tratamientosForm.get('description')?.value,
       tratamiento: this.tratamientosForm.get('treatments')?.value,
       palabrasClaves: this.tratamientosForm.get('words')?.value,
+      usuario: this.user,
     };
 
     if (!this.tratamientosForm.invalid) {
@@ -116,14 +122,17 @@ export class TratamientosComponent implements OnInit, AfterViewInit {
         this.getTreatments();
         console.log(result);
       });
-    }  
+    }
   }
 
   getTreatments() {
     this.Loading = true; // Iniciar carga
+
     this.Service.GetTratamiento().subscribe({
       next: (result: Tratamiento[]) => {
-        this.allTreatments = result.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        this.allTreatments = result
+          .filter((tratamiento) => tratamiento.usuario === this.user)
+          .sort((a, b) => a.nombre.localeCompare(b.nombre));
         this.treatments = this.allTreatments;
       },
       error: (error) => {
@@ -131,7 +140,7 @@ export class TratamientosComponent implements OnInit, AfterViewInit {
       },
       complete: () => {
         this.Loading = false; // Finalizar carga
-      }
+      },
     });
   }
 
@@ -158,6 +167,7 @@ export class TratamientosComponent implements OnInit, AfterViewInit {
         this.mostrarTratamientosForm.get('descriptionV')?.value,
       tratamiento: this.mostrarTratamientosForm.get('treatmentsV')?.value,
       palabrasClaves: this.mostrarTratamientosForm.get('wordsV')?.value,
+      usuario: this.user,
     };
     this.Service.EditTratamiento(treatmentsEdit).subscribe({
       next: (response) => {
@@ -177,8 +187,8 @@ export class TratamientosComponent implements OnInit, AfterViewInit {
         this.tratamientoSeleccionado = false;
         this.Loading = false;
       },
-          });
-          // this.Loading = false;
+    });
+    // this.Loading = false;
   }
 
   delete() {
@@ -201,7 +211,7 @@ export class TratamientosComponent implements OnInit, AfterViewInit {
             this.cleanFormmMostrarTratamientos();
             this.getTreatments();
             this.tratamientoSeleccionado = false;
-                      },
+          },
           error: (error) => {
             this.cleanFormmMostrarTratamientos();
             Swal.fire({
@@ -251,7 +261,7 @@ export class TratamientosComponent implements OnInit, AfterViewInit {
       );
     }
   }
-  
+
   animationCreated(animationItem: AnimationItem): void {
     console.log(animationItem);
   }

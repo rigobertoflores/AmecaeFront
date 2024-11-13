@@ -1,88 +1,94 @@
 <div class="timeline timeline-inverse">
 
     <div class="time-label">
-    <span class="bg-danger">
-    {{fechaActual}}
-    </span>
+        <span class="bg-danger">
+            {{fechaActual}}
+        </span>
     </div>
-    
-    
+
+
     <div>
-    <i class="fas fa-envelope bg-primary"></i>
-    <div class="timeline-item">
-    <h3 class="timeline-header"><a href="#">Agregar </a>Receta</h3>
-    <div class="timeline-body">
+        <i class="fas fa-envelope bg-primary"></i>
+        <div class="timeline-item">
+            <h3 class="timeline-header"><a href="#">Agregar </a>Receta</h3>
+            <div class="timeline-body">
 
-        <div class="form-group">
-            <label for="historiaSelect">Selecciona un Tratamiento</label>
-            <select id="historiaSelect" class="form-control" 
-            [(ngModel)]="tratamientoSeleccionado"
-                [ngModelOptions]="{standalone: true}">
-                <option value="0">-- Seleccione una Tratamiento --</option>
-                <option *ngFor="let tratamiento of allTreatments" [value]="tratamiento.id">{{ tratamiento.nombre }}</option>
-            </select>
-        </div>
-        <button type="button" class="btn btn-primary btn-block" (click)="confirmartratamiento([0,data])">Agregar
-        Tratamiento</button>
-        <br/>
+                <div class="form-group">
+                    <label for="historiaSelect">Selecciona un Tratamiento</label>
+                    <select id="historiaSelect" class="form-control" [(ngModel)]="tratamientoSeleccionado"
+                        [ngModelOptions]="{standalone: true}">
+                        <option value="0">-- Seleccione una Tratamiento --</option>
+                        <option *ngFor="let tratamiento of allTreatments" [value]="tratamiento.id">{{ tratamiento.nombre
+                            }}</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary btn-block" (click)="confirmartratamiento([0,data])">Agregar
+                    Tratamiento</button>
+                <br />
 
-        <ckeditor [config]="{ toolbar: [  'heading', '|',
+                <ckeditor [config]="{ toolbar: [  'heading', '|',
         'bold', 'italic', '|',
         'bulletedList', 'numberedList', '|',
         'outdent', 'indent', '|',
         'blockQuote', '|',
         'undo', 'redo', '|',
-        'alignment'] }" tagName="textarea" [editor]="Editor" [(ngModel)]="data" ></ckeditor>
+        'alignment'] }" tagName="textarea" [editor]="Editor" [(ngModel)]="data"></ckeditor>
+            </div>
+            <div class="timeline-footer">
+                <button type="button" class="btn btn-success btn-sm" (click)="printContent(data)"
+                    [disabled]="clave == '0'">Imprimir</button>
+                <button type="button" class="btn btn-primary btn-sm" (click)="guardarEditarreceta([0,data])"
+                    [disabled]="clave == '0'">Guardar</button>
+                <!-- Mensaje de aviso -->
+                <div *ngIf="clave == '0'" class="alert alert-warning mt-2">
+                    Los botones se habilitaran cuando guarde la información general del paciente.
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="timeline-footer">
-    <button type="button" class="btn btn-success btn-sm" (click)="printContent(data)" [disabled]="clave == '0'">Imprimir</button>
-    <button type="button" class="btn btn-primary btn-sm" (click)="guardarEditarreceta([0,data])" [disabled]="clave == '0'">Guardar</button>
-    <!-- Mensaje de aviso -->
-    <div *ngIf="clave == '0'" class="alert alert-warning mt-2">
-        Los botones se habilitaran cuando guarde la información general del paciente.
-    </div>
-    </div>
-    </div>
-    </div>
-    
-    
+
+
     <div *ngFor="let receta of recetas">
-    <span class="bg-danger fecha_label">
-        {{receta.fecha}}
-    </span>
-    <br/>
-    <div class="timeline-item">
-    <div class="timeline-body">
-        <div class="form-group">
-            <label for="historiaSelect">Selecciona un Tratamiento</label>
-            <select id="historiaSelect" class="form-control" 
-            [(ngModel)]="tratamientoSeleccionado"
-                [ngModelOptions]="{standalone: true}">
-                <option value="0">-- Seleccione una tratamiento --</option>
-                <option *ngFor="let tratamiento of allTreatments" [value]="tratamiento.id">{{ tratamiento.nombre }}</option>
-            </select>
-        </div>
-        <button type="button" class="btn btn-primary btn-block" (click)="confirmartratamiento([receta.id,receta.receta])">Agregar
-        Tratamiento</button>
-        <br/>
+        <span class="bg-danger fecha_label">
+            {{receta.fecha}}
+        </span>
+        <br />
+        <div class="timeline-item">
+            <div class="timeline-body">
+                <div class="form-group">
+                    <label for="historiaSelect">Selecciona un Tratamiento</label>
+                    <select id="historiaSelect" class="form-control" [(ngModel)]="tratamientoSeleccionado"
+                        [ngModelOptions]="{standalone: true}">
+                        <option value="0">-- Seleccione una tratamiento --</option>
+                        <option *ngFor="let tratamiento of allTreatments" [value]="tratamiento.id">{{ tratamiento.nombre
+                            }}</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary btn-block"
+                    (click)="confirmartratamiento([receta.id,receta.receta])">Agregar
+                    Tratamiento</button>
+                <br />
 
 
-        <ckeditor [config]="{ toolbar: [  'heading', '|',
+                <ckeditor [config]="{ toolbar: [  'heading', '|',
         'bold', 'italic', '|',
         'bulletedList', 'numberedList', '|',
         'outdent', 'indent', '|',
         'blockQuote', '|',
         'undo', 'redo', '|',
-        'alignment'] }" tagName="textarea" [editor]="Editor"  [(ngModel)]="receta.receta" [id]="receta.id"></ckeditor>
+        'alignment'] }" tagName="textarea" [editor]="Editor" [(ngModel)]="receta.receta" [id]="receta.id"></ckeditor>
+            </div>
+            <div class="timeline-footer">
+                <button type="button" class="btn btn-success btn-sm"
+                    (click)="printContent(receta.receta)">Imprimir</button>
+                <button type="button" class="btn btn-warning btn-flat btn-sm"
+                    (click)="guardarEditarreceta([receta.id,receta.receta])">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm"
+                    (click)="borrarreceta([receta.id,receta.receta])">Borrar</button>
+            </div>
+        </div>
     </div>
-    <div class="timeline-footer">
-    <button type="button" class="btn btn-success btn-sm" (click)="printContent(receta.receta)">Imprimir</button>
-    <button type="button" class="btn btn-warning btn-flat btn-sm" (click)="guardarEditarreceta([receta.id,receta.receta])">Editar</button>
-    <button type="button" class="btn btn-danger btn-sm"(click)="borrarreceta([receta.id,receta.receta])">Borrar</button>
-    </div>
-    </div>
-    </div>   
-  </div>
+</div>
 
 <div class="lottie-container" *ngIf="showLoading">
     <ng-container>

@@ -56,4 +56,5 @@ export interface Paciente {
   fechaUltimaConsulta: string;
   hipertensionFamiliar: string;
   cardiopatiaFamiliar: string;
+  otraEnfermedadPersonal: string;
 }

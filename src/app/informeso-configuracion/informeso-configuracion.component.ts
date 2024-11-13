@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { informeoperatorio } from '../interface/informeoperatorio';
 import { LoadingComponent } from '../loading/loading.component';
 import Swal from 'sweetalert2';
+import { UserService } from '../Services/user.service';
 
 @Component({
   selector: 'app-informeso-configuracion',
@@ -42,13 +43,14 @@ export class InformesoConfiguracionComponent implements OnInit {
   mes: any = this.fechaActual.getMonth() + 1; // Los meses empiezan en 0
   año: number = this.fechaActual.getFullYear();
   public mostrarBotonEliminar: boolean = false;
+  user: any;
 
   ajustarAltura(elemento: HTMLTextAreaElement): void {
     elemento.style.height = 'auto'; // Resetea la altura para calcular correctamente
     elemento.style.height = elemento.scrollHeight + 'px'; // Ajusta la altura al contenido
   }
 
-  constructor(private Service: Service) {}
+  constructor(private Service: Service, private authService: UserService) {}
 
   ngOnInit(): void {
     this.cargarListaInformeform();
@@ -63,11 +65,18 @@ export class InformesoConfiguracionComponent implements OnInit {
     }/${this.año}`;
   }
   guardarEditarInforme() {
+    if (this.authService.isAuthenticated()) {
+      const userJson = localStorage.getItem('user');
+      if (userJson) {
+        this.user = JSON.parse(userJson).email.split('@')[0];
+      }
+    }
     if (!this.informeform.invalid) {
       const infor: informeoperatorio = {
         id: this.informeform.get('id')?.value || 0,
         informe: this.informeform?.get('informe')?.value,
         nombre: this.informeform.get('nombre')?.value,
+        usuario: this.user,
       };
       this.Service.postData('PostInformeo', infor).subscribe(
         (result: informeoperatorio[]) => {
@@ -162,6 +171,7 @@ export class InformesoConfiguracionComponent implements OnInit {
             id: this.informeform.get('id')?.value || 0,
             informe: this.informeform?.get('informe')?.value,
             nombre: this.informeform.get('nombre')?.value,
+            usuario: this.informeform.get('usuario')?.value,
           };
 
           this.Service.postData('DeleteInforme', infor).subscribe(

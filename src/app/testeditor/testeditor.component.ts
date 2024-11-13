@@ -170,11 +170,18 @@ export class TesteditorComponent implements OnInit {
   }
 
   getTreatments() {
+     if (this.authService.isAuthenticated()) {
+       const userJson = localStorage.getItem('user');
+       if (userJson) {
+         this.user = JSON.parse(userJson).email.split('@')[0];
+       }
+     }
     this.Loading = true; // Iniciar carga
     this.Service.GetTratamiento().subscribe({
       next: (result: Tratamiento[]) => {
         // Procesar cada tratamiento para convertir los saltos de línea en <br>
         this.allTreatments = result
+          .filter((tratamiento) => tratamiento.usuario === this.user)
           .map((tratamiento) => {
             return {
               ...tratamiento,

@@ -187,6 +187,7 @@ export class ExpedientePacienteComponent implements OnInit {
         fechaUltimaConsulta: '',
         cardiopatiaFamiliar: '',
         hipertensionFamiliar: '',
+        otraEnfermedadPersonal: '',
       };
 
       this.cargarFormulario(pacienteVacio);
@@ -303,8 +304,12 @@ export class ExpedientePacienteComponent implements OnInit {
       amigdalitis: new FormControl(
         data.amigdalitis == '' ? 'No' : data.amigdalitis
       ),
-      bronquitis: new FormControl(data.bronquitis == '' ? 'No' : data.bronquitis),
-      bronconeumonia: new FormControl(data.bronconeumonia == '' ? 'No' : data.bronconeumonia),
+      bronquitis: new FormControl(
+        data.bronquitis == '' ? 'No' : data.bronquitis
+      ),
+      bronconeumonia: new FormControl(
+        data.bronconeumonia == '' ? 'No' : data.bronconeumonia
+      ),
       hepatitisViralTipo: new FormControl(data.hepatitisViralTipo),
       parasitosis: new FormControl(
         data.parasitosis == '' ? 'No' : data.parasitosis
@@ -339,6 +344,8 @@ export class ExpedientePacienteComponent implements OnInit {
           ? data.fechaUltimaConsulta
           : formattedDate
       ),
+
+      otraEnfermedadPersonal: new FormControl(data.otraEnfermedadPersonal),
     });
   }
 
@@ -639,6 +646,12 @@ export class ExpedientePacienteComponent implements OnInit {
 
   @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+      const activeElement = document.activeElement as HTMLElement;
+
+      // Verifica si el elemento activo o su padre tienen el atributo data-allow-default
+      if (activeElement.closest('[data-allow-default="true"]')) {
+        return; // No hacer nada, permitimos el comportamiento predeterminado
+      }
     const key = event.key;
     if (['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'].includes(key)) {
       event.preventDefault(); // Previene el desplazamiento de la página
