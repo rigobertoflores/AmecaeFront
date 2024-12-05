@@ -11,4 +11,5 @@ export enum OpcionesSidebar {
   Plantillas = 'Plantillas',
   EnviarNotificaciones = 'EnviarNotificaciones',
   ConsultarNotificaciones = 'ConsultarNotificaciones',
+  ConfigurarJustificaciones = 'ConfigurarJustificaciones',
 }

@@ -65,6 +65,13 @@ export class TesteditorHistoriaComponent implements OnInit, AfterViewInit {
 
   guardarHistoriaExpediente() {
     if (this.historiaSeleccionada == 0) {
+       Swal.fire({
+         position: 'center',
+         icon: 'info',
+         title: 'Para agregar una historia primero debe seleccionar una',
+         showConfirmButton: false,
+         timer: 2000,
+       });
       return;
     } else {
       const histo = this.historias.find(

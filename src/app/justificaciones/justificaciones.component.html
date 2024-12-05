@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-12 colsm-12">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="historiaSelect">Selecciona una plantilla</label>
+                <select id="historiaSelect" class="form-control" [(ngModel)]="plantillaSeleccionada"
+                    [ngModelOptions]="{standalone: true}">
+                    <option value="0">-- Seleccione una justificacion--</option>
+                    <option *ngFor="let historia of informe" [value]="historia.id">{{ historia.nombre }}</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary btn-block" (click)="MostrarPlantillaSeleccionada()">Agregar
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 colsm-12">
+        <div class="card-body">
+            <div class="form-group" data-allow-default="true">
+                <label for="nombreinput">Expediente</label>
+                <textarea class="texthistoria" id="nombreinputtexthistoria" [(ngModel)]="justificacionEnExpediente.justificacion1"
+                    class="form-control" style="font-family: 'Courier New', monospace; overflow: auto;" ></textarea>
+                <br>
+                <button type="button" class="btn btn-success btn-block"
+                    (click)="printContent(justificacionEnExpediente.justificacion1)" [disabled]="parametro == '0'">Imprimir</button>
+                <button type="button" class="btn btn-primary btn-block" (click)="guardarinformedentroexpediente()"
+                    [disabled]="parametro == '0'">Guardar Informe</button>
+                <!-- Mensaje de aviso -->
+                <div *ngIf="parametro == '0'" class="alert alert-warning mt-2">
+                    Los botones se habilitaran cuando guarde la información general del paciente.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="lottie-container" *ngIf="showLoading">
+    <ng-container>
+        <app-loading></app-loading>
+    </ng-container>
+</div>

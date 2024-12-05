@@ -40,7 +40,27 @@ export class LoginComponent implements OnInit {
         console.log('Login successful', response);
         this.router.navigate(['/inicio']);
       })
-      .catch((error: any) => console.log('Error en login con firebase', error));
+      .catch((error: any) => {
+       
+        console.error('Error en login con Firebase', error);
+        // Manejar errores específicos
+        if (
+          error.code === 'auth/invalid-credential' ||
+          error.code === 'auth/user-not-found'
+        ) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Credenciales incorrectas',
+            text: 'El usuario o la contraseña son incorrectos. Por favor, verifique e intente nuevamente.',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error de acceso',
+            text: 'Ocurrió un error al intentar acceder. Por favor, comuníquese con el administrador.',
+          });
+        }
+      });
   }
 
   onClickGoogle() {

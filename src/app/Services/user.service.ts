@@ -15,6 +15,7 @@ import { catchError, from, map, Observable, tap, throwError } from 'rxjs';
 import { UrlsAuth, UrlsBackend } from '../enums/urls_back';
 import { Service } from './../Services/Service';
 import { HttpParams } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -55,6 +56,7 @@ export class UserService {
         email,
         password
       );
+
       // Guarda solamente la información necesaria del usuario en el almacenamiento local
       const user = {
         uid: result.user.uid,
@@ -64,8 +66,27 @@ export class UserService {
       localStorage.setItem('user', JSON.stringify(user));
       console.log('Usuario logueado con Firebase', result);
       return true;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error en el logging', error);
+
+      // Manejo de errores y mensajes
+      if (
+        error.code === 'auth/invalid-credential' ||
+        error.code === 'auth/user-not-found'
+      ) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Credenciales incorrectas',
+          text: 'El usuario o la contraseña son incorrectos. Por favor, verifique e intente nuevamente.',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error de acceso',
+          text: 'Ocurrió un error al intentar acceder. Por favor, comuníquese con el administrador.',
+        });
+      }
+
       return false;
     }
   }

@@ -39,6 +39,7 @@ import Swal from 'sweetalert2';
 import { ComplementariosComponent } from '../complementarios/complementarios.component';
 import { CalculadoraIMCComponent } from '../calculadora-imc/calculadora-imc.component';
 import { UrlsBackend, UrlsPacientes } from '../enums/urls_back';
+import { JustificacionesComponent } from "../justificaciones/justificaciones.component";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -67,7 +68,8 @@ export const appConfig: ApplicationConfig = {
     TesteditorinformesoComponent,
     ComplementariosComponent,
     CalculadoraIMCComponent,
-  ],
+    JustificacionesComponent
+],
 })
 export class ExpedientePacienteComponent implements OnInit {
   parametro: string | null = null;
@@ -444,12 +446,19 @@ export class ExpedientePacienteComponent implements OnInit {
     if (!this.PacienteFormulario.invalid) {
       this.showLoading = true; // Inicia la carga
       if (
+        this.fechaconsultaactual != undefined && this.fechaconsultaactual != '' &&
         this.fechaconsultaactual !=
         this.PacienteFormulario.get('fechaConsulta')?.value
-      )
+      ) {
+        console.log(
+          'se actualiza el valor de la fecha de la ultima consulta',
+          this.fechaconsultaactual,
+          this.PacienteFormulario.get('fechaUltimaConsulta')?.value
+        );
         this.PacienteFormulario.get('fechaUltimaConsulta')?.setValue(
           this.fechaconsultaactual
         );
+      }      
       this.Service.postData(
         'PostPaciente',
         this.PacienteFormulario.value

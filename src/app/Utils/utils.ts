@@ -14,8 +14,10 @@ static  getRouteForOption(option: OpcionesSidebar): string | null {
       [OpcionesSidebar.EnviarNotificaciones]: '/enviar_notificaciones',
       [OpcionesSidebar.ConsultarNotificaciones]: '/consultar_notificaciones',
       [OpcionesSidebar.Impresion]: '/configuracion_impresion',
-      [OpcionesSidebar.ConfiguracionInforme]: '/configuracion_informesoperatorios',
+      [OpcionesSidebar.ConfiguracionInforme]:
+        '/configuracion_informesoperatorios',
       [OpcionesSidebar.IMC]: '/imc',
+      [OpcionesSidebar.ConfigurarJustificaciones]: '/configurar_justificaciones',
     };
 
     return routesMap[option] || null;

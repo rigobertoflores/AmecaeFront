@@ -51,8 +51,10 @@
                                         <a class="nav-link" href="#analisis" data-toggle="tab">Complementarios</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#informe" data-toggle="tab">Justificaciones e
-                                            Informes</a>
+                                        <a class="nav-link" href="#justificaciones" data-toggle="tab">Justificaciones</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#informe" data-toggle="tab">Informes</a>
                                     </li>
                                     <li class="nav-item" *ngIf="imprimirExpCompleto">
                                         <a class="nav-link" href="#imprimirExpCompleto" data-toggle="tab">Imprimir
@@ -1654,6 +1656,9 @@
                                     </div>
                                     <div class="tab-pane" id="informe">
                                         <app-testeditorinformeso [parametro]="parametro"></app-testeditorinformeso>
+                                    </div>
+                                    <div class="tab-pane" id="justificaciones">
+                                        <app-justificaciones [parametro]="parametro"></app-justificaciones>
                                     </div>
                                     <div class="tab-pane" id="analisis">
                                         <app-complementarios></app-complementarios>

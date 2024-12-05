@@ -1,0 +1,88 @@
+<div class="wrapper">
+    <app-menu></app-menu>
+    <app-sidebar></app-sidebar>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Configuraciones de Informes</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">Fecha actual: {{fechaFormateada}}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary card-outline" [formGroup]="informeform">
+
+                        <div class="row">
+                            <div class="col-md-12 colsm-12">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 colsm-12">
+                                            <div class="form-group">
+                                                <label for="nombreinput">Nombre de la Justificación</label>
+                                                <input type="text" id="nombreinput" formControlName="nombre"
+                                                    class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 colsm-12">
+                                            <div class="col-sm-6">
+
+                                                <div class="form-group">
+                                                    <label for="historiaSelect">Selecciona una Justificación</label>
+                                                    <select id="historiaSelect" class="form-control"
+                                                        [(ngModel)]="informeeleccionada"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        (change)="onInformeChange($event)">
+                                                        <option value="0">-- Seleccione un justificación --</option>
+                                                        <option *ngFor="let infor of informe" [value]="infor.id">{{
+                                                            infor.nombre }}</option>
+                                                    </select>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="nombreinput">Plantilla del Informe</label>
+                                        <textarea class="texthistoria" id="nombreinputtexthistoria"
+                                            formControlName="informe" class="form-control"
+                                            (input)="ajustarAltura($event.target)"
+                                            style="font-family: 'Courier New', monospace;"></textarea>
+                                        <br>
+                                        <button type="button" class="btn btn-primary btn-block"
+                                            (click)="guardarEditarInforme()">Guardar</button>
+                                        <button *ngIf="mostrarBotonEliminar" type="button"
+                                            class="btn btn-danger btn-block"
+                                            (click)="eliminarInforme()">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="lottie-container" *ngIf="showLoading">
+    <ng-container>
+        <app-loading></app-loading>
+    </ng-container>
+</div>

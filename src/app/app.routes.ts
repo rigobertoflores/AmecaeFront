@@ -17,6 +17,8 @@ import { PlantillasCorreosComponent } from './plantillas-correos/plantillas-corr
 import { EnviarNotificacionesComponent } from './enviar-notificaciones/enviar-notificaciones.component';
 import { ConsultarNotificacionesComponent } from './consultar-notificaciones/consultar-notificaciones.component';
 import { ConfiguracionImpresionComponent } from './configuracion-impresion/configuracion-impresion.component';
+import { JustificacionesComponent } from './justificaciones/justificaciones.component';
+import { JustificacionConfiguracionComponent } from './justificacion-configuracion/justificacion-configuracion.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -77,5 +79,14 @@ export const routes: Routes = [
     component: ConsultarNotificacionesComponent,
     canActivate: [AuthGuard],
   },
-    { 'path': 'configuracion_impresion', component: ConfiguracionImpresionComponent, canActivate: [AuthGuard] },
+  {
+    path: 'configuracion_impresion',
+    component: ConfiguracionImpresionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'configurar_justificaciones',
+    component: JustificacionConfiguracionComponent,
+    canActivate: [AuthGuard],
+  },
 ];

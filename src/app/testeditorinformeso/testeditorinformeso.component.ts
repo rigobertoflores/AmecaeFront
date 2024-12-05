@@ -86,6 +86,13 @@ export class TesteditorinformesoComponent implements OnInit, AfterViewInit {
 
   guardarinformeexpediente() {
     if (this.informeeleccionada == 0) {
+       Swal.fire({
+         position: 'center',
+         icon: 'info',
+         title: 'Para agregar una plantilla primero de seleccionar una',
+         showConfirmButton: false,
+         timer: 2000,
+       });
       return;
     } else {
       const histo = this.informe.find(
