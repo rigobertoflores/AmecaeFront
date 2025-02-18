@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Pacientes</h1>
+                        <h1>Paciente: {{pacientedatos?.nombre}}</h1>    
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -51,7 +51,8 @@
                                         <a class="nav-link" href="#analisis" data-toggle="tab">Complementarios</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#justificaciones" data-toggle="tab">Justificaciones</a>
+                                        <a class="nav-link" href="#justificaciones"
+                                            data-toggle="tab">Justificaciones</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#informe" data-toggle="tab">Informes</a>
@@ -767,6 +768,35 @@
                                                                                             class="form-control" />
                                                                                     </div>
                                                                                 </div>
+
+                                                                                <div class="col-md-4 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="inputGrupoSanguineo">Grupo
+                                                                                            Sanguíneo</label>
+                                                                                        <select #input id="inputGrupoSanguineo" class="form-control" formControlName="grupoSanguineo">
+                                                                                            <option value="No especificado">
+                                                                                                Seleccione...
+                                                                                            </option>
+                                                                                            <option value="A+">A+
+                                                                                            </option>
+                                                                                            <option value="A-">A-
+                                                                                            </option>
+                                                                                            <option value="B+">B+
+                                                                                            </option>
+                                                                                            <option value="B-">B-
+                                                                                            </option>
+                                                                                            <option value="AB+">AB+
+                                                                                            </option>
+                                                                                            <option value="AB-">AB-
+                                                                                            </option>
+                                                                                            <option value="O+">O+
+                                                                                            </option>
+                                                                                            <option value="O-">O-
+                                                                                            </option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1199,13 +1229,16 @@
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
                                                                                         <label
-                                                                                            for="inputBronquitis">Bronquitis</label>                                                                                      
-                                                                                            <select #input id="inputBronquitis" class="form-control" formControlName="bronquitis">
-                                                                                                <option value="Sí">Sí
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                </option>
-                                                                                            </select>
+                                                                                            for="inputBronquitis">Bronquitis</label>
+                                                                                        <select #input
+                                                                                            id="inputBronquitis"
+                                                                                            class="form-control"
+                                                                                            formControlName="bronquitis">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
 
@@ -1213,12 +1246,15 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputBronconeumonia">Bronconeumonía</label>
-                                                                                            <select #input id="inputBronconeumonia" class="form-control" formControlName="bronconeumonia">
-                                                                                                <option value="Sí">Sí
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                </option>
-                                                                                            </select>                                                                                        
+                                                                                        <select #input
+                                                                                            id="inputBronconeumonia"
+                                                                                            class="form-control"
+                                                                                            formControlName="bronconeumonia">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
 
@@ -1240,12 +1276,15 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputParasitosis">Parasitosis</label>
-                                                                                            <select #input id="inputParasitosis" class="form-control" formControlName="parasitosis">
-                                                                                                <option value="Sí">Sí
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                </option>
-                                                                                            </select>                                                                                        
+                                                                                        <select #input
+                                                                                            id="inputParasitosis"
+                                                                                            class="form-control"
+                                                                                            formControlName="parasitosis">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
 
@@ -1253,12 +1292,15 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputToxoplasmosis">Toxoplasmosis</label>
-                                                                                            <select #input id="inputToxoplasmosis" class="form-control" formControlName="toxoplasmosis">
-                                                                                                <option value="Sí">Sí
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                </option>
-                                                                                            </select>
+                                                                                        <select #input
+                                                                                            id="inputToxoplasmosis"
+                                                                                            class="form-control"
+                                                                                            formControlName="toxoplasmosis">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
 
@@ -1266,12 +1308,15 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputCitomegalovirus">Citomegalovirus</label>
-                                                                                            <select #input id="inputCitomegalovirus" class="form-control" formControlName="citomegalovirus">
-                                                                                                <option value="Sí">Sí
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                </option>
-                                                                                            </select>                                                                                        
+                                                                                        <select #input
+                                                                                            id="inputCitomegalovirus"
+                                                                                            class="form-control"
+                                                                                            formControlName="citomegalovirus">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -1292,12 +1337,15 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputClamydiasis">Clamydiasis</label>
-                                                                                            <select #input id="inputClamydiasis" class="form-control" formControlName="clamydiasis">
-                                                                                                <option value="Sí">Sí
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                </option>
-                                                                                            </select>                                                                                        
+                                                                                        <select #input
+                                                                                            id="inputClamydiasis"
+                                                                                            class="form-control"
+                                                                                            formControlName="clamydiasis">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
 
@@ -1307,7 +1355,7 @@
                                                                                             for="inputHIV">HIV</label>
                                                                                         <select #input id="inputHIV"
                                                                                             class="form-control"
-                                                                                            formControlName="hiv">                                                                                           
+                                                                                            formControlName="hiv">
                                                                                             <option value="Sí">Sí
                                                                                             </option>
                                                                                             <option value="No">No
@@ -1324,7 +1372,7 @@
                                                                                             for="inputSifilis">Sífilis</label>
                                                                                         <select #input id="inputSifilis"
                                                                                             class="form-control"
-                                                                                            formControlName="sifilis">                                                                                            
+                                                                                            formControlName="sifilis">
                                                                                             <option value="Sí">Sí
                                                                                             </option>
                                                                                             <option value="No">No
@@ -1339,7 +1387,7 @@
                                                                                             for="inputMicosis">Micosis</label>
                                                                                         <select #input id="inputMicosis"
                                                                                             class="form-control"
-                                                                                            formControlName="micosis">                                                                                            
+                                                                                            formControlName="micosis">
                                                                                             <option value="Sí">Sí
                                                                                             </option>
                                                                                             <option value="No">No
@@ -1355,7 +1403,7 @@
                                                                                             Pélvica)</label>
                                                                                         <select #input id="inputEIP"
                                                                                             class="form-control"
-                                                                                            formControlName="eip">                                                                                          
+                                                                                            formControlName="eip">
                                                                                             <option value="Sí">Sí
                                                                                             </option>
                                                                                             <option value="No">No
@@ -1370,12 +1418,15 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputHipertension">Hipertensión</label>
-                                                                                            <select #input id="inputHipertension" class="form-control" formControlName="hipertension">
-                                                                                                <option value="Sí">Sí
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                </option>
-                                                                                            </select>                                                                                        
+                                                                                        <select #input
+                                                                                            id="inputHipertension"
+                                                                                            class="form-control"
+                                                                                            formControlName="hipertension">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
 
@@ -1384,12 +1435,15 @@
                                                                                         <label
                                                                                             for="inputDiabetesMellitus">Diabetes
                                                                                             Mellitus</label>
-                                                                                            <select #input id="inputDiabetesMellitus" class="form-control" formControlName="diabetesMellitus">
-                                                                                                <option value="Sí">Sí
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                </option>
-                                                                                            </select>                                                                                       
+                                                                                        <select #input
+                                                                                            id="inputDiabetesMellitus"
+                                                                                            class="form-control"
+                                                                                            formControlName="diabetesMellitus">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
 
@@ -1490,12 +1544,15 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputCondilomatosis">Condilomatosis</label>
-                                                                                            <select #input id="inputCondilomatosis" class="form-control" formControlName="condilomatosis">
-                                                                                                <option value="Sí">Sí
-                                                                                                </option>
-                                                                                                <option value="No">No
-                                                                                                </option>
-                                                                                            </select>                                                                                       
+                                                                                        <select #input
+                                                                                            id="inputCondilomatosis"
+                                                                                            class="form-control"
+                                                                                            formControlName="condilomatosis">
+                                                                                            <option value="Sí">Sí
+                                                                                            </option>
+                                                                                            <option value="No">No
+                                                                                            </option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
 
@@ -1522,14 +1579,19 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
-                                                                                                                                                         
+
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
-                                                                                        <label for="inputDisplasias">Otras Enfermedades</label>
-                                                                                        <input #input type="text" id="inputDOtrasEnfermedadesPers" formControlName="otraEnfermedadPersonal" class="form-control" />
+                                                                                        <label
+                                                                                            for="inputDisplasias">Otras
+                                                                                            Enfermedades</label>
+                                                                                        <input #input type="text"
+                                                                                            id="inputDOtrasEnfermedadesPers"
+                                                                                            formControlName="otraEnfermedadPersonal"
+                                                                                            class="form-control" />
                                                                                     </div>
-                                                                                </div>                                                                           
-                                                                               
+                                                                                </div>
+
                                                                             </div>
                                                                         </div>
 
@@ -1666,7 +1728,8 @@
                                     <div class="tab-pane" id="imprimirExpCompleto">
                                         <div class="alert alert-info" role="alert">
                                             <h4 class="alert-heading">Imprimir Expediente Completo</h4>
-                                            <p>Estás a punto de imprimir el expediente completo del paciente. Las secciones que se van a imprimir
+                                            <p>Estás a punto de imprimir el expediente completo del paciente. Las
+                                                secciones que se van a imprimir
                                                 incluyen:</p>
                                             <ul>
                                                 <li>Información General</li>
@@ -1675,13 +1738,16 @@
                                                 <li>Complementarios</li>
                                                 <li>Justificaciones e Informes</li>
                                             </ul>
-                                            <p>**Nota: Ten en cuenta que si alguna de las secciones no tienen información no se verá reflejada en el documento generado.</p>
+                                            <p>**Nota: Ten en cuenta que si alguna de las secciones no tienen
+                                                información no se verá reflejada en el documento generado.</p>
                                             <hr>
-                                            <p class="mb-0">Por favor, revisa el contenido antes de proceder a la impresión.</p>
+                                            <p class="mb-0">Por favor, revisa el contenido antes de proceder a la
+                                                impresión.</p>
                                         </div>
-                                    
+
                                         <div>
-                                            <button (click)="printPage()" type="button" class="btn btn-success btn-block">
+                                            <button (click)="printPage()" type="button"
+                                                class="btn btn-success btn-block">
                                                 Imprimir Expediente Completo
                                             </button>
                                         </div>
