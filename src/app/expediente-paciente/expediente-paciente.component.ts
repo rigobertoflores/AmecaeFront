@@ -253,18 +253,14 @@ export class ExpedientePacienteComponent implements OnInit {
           ? 'NoEspecificado'
           : data.estadoCivil
       ),
-      ocupacion: new FormControl(
-        data.ocupacion == '' ? 'NoEspecificado' : data.ocupacion
-      ),
+      ocupacion: new FormControl(data.ocupacion),
       domicilio: new FormControl(data.domicilio),
       poblacion: new FormControl(data.poblacion),
       telefono: new FormControl(data.telefono),
       email: new FormControl(data.email),
       nombreDelEsposo: new FormControl(data.nombreDelEsposo),
       edadDelEsposo: new FormControl(data.edadDelEsposo),
-      ocupacionEsposo: new FormControl(
-        data.ocupacionEsposo == '' ? 'NoEspecificado' : data.ocupacionEsposo
-      ),
+      ocupacionEsposo: new FormControl(data.ocupacionEsposo),
       referencia: new FormControl(data.referencia),
       diabetes: new FormControl(
         data.diabetes == '' ? 'NoEspecificado' : data.diabetes

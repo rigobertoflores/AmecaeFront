@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Paciente: {{pacientedatos?.nombre}}</h1>    
+                        <h1>Paciente: {{pacientedatos?.nombre || 'Nuevo paciente'}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -205,6 +205,9 @@
                                                                                                 Divorciado</option>
                                                                                             <option value="Viudo">Viudo
                                                                                             </option>
+                                                                                            <option value="Acompanada">
+                                                                                                Acompañada/Acompañado
+                                                                                            </option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -213,62 +216,10 @@
                                                                                     <div class="form-group">
                                                                                         <label
                                                                                             for="inputOcupacion">Ocupación</label>
-                                                                                        <select #input
+                                                                                        <input #input type="text"
                                                                                             id="inputOcupacion"
-                                                                                            class="form-control"
-                                                                                            formControlName="ocupacion">
-                                                                                            <option
-                                                                                                value="NoEspecificado">
-                                                                                                Seleccione...</option>
-                                                                                            <option value="Abogado">
-                                                                                                Abogado(a)
-                                                                                            </option>
-                                                                                            <option value="AmaCasa">
-                                                                                                Ama(o) de casa
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="AgenteDeViajes">
-                                                                                                Agente de viajes
-                                                                                            </option>
-                                                                                            <option value="Arquitecto">
-                                                                                                Arquitecto
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="BienesRaices">
-                                                                                                Bienes Raíces
-                                                                                            </option>
-                                                                                            <option value="Camarero">
-                                                                                                Camarero/Camarera
-                                                                                            </option>
-                                                                                            <option value="Gobierno">
-                                                                                                Gobierno
-                                                                                            </option>
-                                                                                            <option value="Estudiante">
-                                                                                                Estudiante
-                                                                                            </option>
-                                                                                            <option value="Profesor">
-                                                                                                Profesor
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="TrabajadorSalud">
-                                                                                                Trabajador de la salud
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="TrabajadorTecnologia">
-                                                                                                Trabajador de la
-                                                                                                tecnología
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="TrabajadorTurismo">
-                                                                                                Trabajador del turismo
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="VendedorTours">
-                                                                                                Vendedor de tours
-                                                                                            </option>
-                                                                                            <option value="Otro">Otro
-                                                                                            </option>
-                                                                                        </select>
+                                                                                            formControlName="ocupacion"
+                                                                                            class="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -381,62 +332,10 @@
                                                                                             for="inputOcupacionEsposo">Ocupación
                                                                                             del
                                                                                             Esposo/a</label>
-                                                                                        <select #input
+                                                                                        <input #input type="text"
                                                                                             id="inputOcupacionEsposo"
-                                                                                            class="form-control"
-                                                                                            formControlName="ocupacionEsposo">
-                                                                                            <option
-                                                                                                value="NoEspecificado">
-                                                                                                Seleccione...</option>
-                                                                                            <option value="Abogado">
-                                                                                                Abogado(a)
-                                                                                            </option>
-                                                                                            <option value="AmaCasa">
-                                                                                                Ama(o) de casa
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="AgenteDeViajes">
-                                                                                                Agente de viajes
-                                                                                            </option>
-                                                                                            <option value="Arquitecto">
-                                                                                                Arquitecto
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="BienesRaices">
-                                                                                                Bienes Raíces
-                                                                                            </option>
-                                                                                            <option value="Camarero">
-                                                                                                Camarero/Camarera
-                                                                                            </option>
-                                                                                            <option value="Gobierno">
-                                                                                                Gobierno
-                                                                                            </option>
-                                                                                            <option value="Estudiante">
-                                                                                                Estudiante
-                                                                                            </option>
-                                                                                            <option value="Profesor">
-                                                                                                Profesor
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="TrabajadorSalud">
-                                                                                                Trabajador de la salud
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="TrabajadorTecnologia">
-                                                                                                Trabajador de la
-                                                                                                tecnología
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="TrabajadorTurismo">
-                                                                                                Trabajador del turismo
-                                                                                            </option>
-                                                                                            <option
-                                                                                                value="VendedorTours">
-                                                                                                Vendedor de tours
-                                                                                            </option>
-                                                                                            <option value="Otro">Otro
-                                                                                            </option>
-                                                                                        </select>
+                                                                                            formControlName="ocupacionEsposo"
+                                                                                            class="form-control" />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -771,10 +670,15 @@
 
                                                                                 <div class="col-md-4 col-sm-12">
                                                                                     <div class="form-group">
-                                                                                        <label for="inputGrupoSanguineo">Grupo
+                                                                                        <label
+                                                                                            for="inputGrupoSanguineo">Grupo
                                                                                             Sanguíneo</label>
-                                                                                        <select #input id="inputGrupoSanguineo" class="form-control" formControlName="grupoSanguineo">
-                                                                                            <option value="No especificado">
+                                                                                        <select #input
+                                                                                            id="inputGrupoSanguineo"
+                                                                                            class="form-control"
+                                                                                            formControlName="grupoSanguineo">
+                                                                                            <option
+                                                                                                value="No especificado">
                                                                                                 Seleccione...
                                                                                             </option>
                                                                                             <option value="A+">A+
@@ -796,7 +700,7 @@
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
-                                                                                
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -807,7 +711,7 @@
                                                                     <div
                                                                         class="card card-primary card-outline collapsed-card">
                                                                         <div class="card-header">
-                                                                            <h2 class="card-title m-0">Grupo Sanguíneo y
+                                                                            <h2 class="card-title m-0">
                                                                                 Enfermedades Previas</h2>
                                                                             <div class="card-tools">
                                                                                 <button type="button"
